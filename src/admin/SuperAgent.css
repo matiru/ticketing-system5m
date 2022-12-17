@@ -1,0 +1,133 @@
+.agentdashboard{
+background-color: #183247;
+height: 100vh;
+display: flex;
+border-radius: 1px;
+
+
+}
+.agentdashboard_sidebar_header{
+margin-bottom: 5px;
+margin-top: 5px;
+border-bottom: 2px solid rgb(106, 105, 104)!important;;
+}
+.agentdashboard_sidebar_header>h3{
+margin-left: -90px;
+font-size: 20px;
+font-weight: 600;
+color:white;
+}
+.agentdashboard_sidebar{
+display: flex;
+flex-direction:column;
+flex: 0.25;
+border-right: 1px solid rgb(106, 105, 104)!important;
+
+}
+/* .agentdashboard_sidebar_nav{
+
+
+
+} */
+
+
+.agentdashboard_tickets{
+display: flex;
+flex-direction: column;
+flex: 0.75;
+border-left: 1px solid rgb(106, 105, 104)!important; 
+border-radius: 5px!important;
+
+
+}
+.agentdashboard_tickets_header{
+display: flex;
+flex-direction: column;
+margin-bottom: 10px;
+border-bottom: 2px solid rgb(106, 105, 104)!important;;
+
+}
+.agentdashboard_tickets_header_heading{
+    display: flex;
+}
+.agentdashboard_tickets_header_heading>h1{
+flex: 1;
+margin-top: 5px;
+font-size: 30px;
+font-weight: 600;
+color:white;
+margin-left: -600px;
+}
+
+.agentdashboard_tickets_header_title{
+display: flex;
+}
+.agentdashboard_tickets_header_title>h2{
+font-size: 20px;
+font-weight: 600;
+color:white;
+flex:0.50;
+margin-left: -190px;
+}
+.button_wrap{
+display: flex;
+justify-content: space-evenly;
+margin-left: 500px;
+}
+.tickets_closed{
+border-radius: 2px;
+ width: 80%;
+ height: 40px;
+ margin-top: 10px;
+ border-color: grey;
+ margin-left: 120px;
+
+}
+.tickets_open{ 
+border-radius: 2px;
+ width: 80%;
+ height: 40px;
+ margin-top: 10px;
+ border-color: grey;
+ 
+}
+.agentdashboard_tickets_ticketsdisplay{
+
+overflow: scroll;
+
+    flex-direction: column;
+}
+.ticket_info1{
+margin-bottom:10px;
+display: flex;
+padding: 1px;
+align-items: center;
+border-bottom: 1px solid rgb(106, 105, 104)!important;;
+border-top: 1px solid rgb(106, 105, 104)!important;;
+border-right: 1px solid rgb(106, 105, 104)!important;
+border-left: 1px solid rgb(106, 105, 104)!important; 
+border-radius: 5px!important;
+margin-left: 20px;
+margin-right:20px;
+background-color: lightgrey;
+}
+.ticket_info1>h2{
+flex: 0.80;
+margin-left: -350px;
+}
+.ticket_info1>h3{
+flex: 0.20;
+}
+ .linkagent{
+  
+    background-color: rgb(0, 255, 153);
+
+border-radius: 2px;
+padding-left: 2px;
+padding-right: 2px;
+border-bottom: 1px solid rgb(106, 105, 104)!important;;
+border-top: 1px solid rgb(106, 105, 104)!important;;
+border-right: 1px solid rgb(106, 105, 104)!important;
+border-left: 1px solid rgb(106, 105, 104)!important; 
+height: 30px;
+ }

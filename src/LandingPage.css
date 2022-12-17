@@ -1,0 +1,324 @@
+.landingpage{
+min-height: 100vh;
+width: 100%;
+display: flex;
+background-color: #183247;
+flex-direction: column;
+}
+.landingpage_header{
+display: flex;
+flex-direction: column;
+justify-content: center;
+}
+.landingpage_header1{
+display: flex;
+justify-content: space-between; 
+
+}
+.landingpage_header11{
+    display: flex;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;   
+}
+.landingpage_header11>h1{
+    font-size: 20px;
+    font-weight: 600;
+    color: #fff;
+    margin-left: 10px;   
+}
+ .linksignup{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    border-radius: 5px;
+    background-color: rgb(106, 105, 104);
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+ }
+.landingpage_header2{
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: rgb(0, 255, 153);
+    color: white;
+    font-size: 15px;
+    font-weight: 600px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+
+ }
+    .linksignup:hover{
+        background-color: rgb(0, 255, 153);
+        color: white;
+        border: 1px solid rgb(0, 255, 153);
+        transition: all 0.3s ease-in-out;
+    }
+
+.landingpage_body{
+  height:70vh;
+  width: 90%;
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-bottom: 1px solid rgb(106, 105, 104)!important;;
+    border-top: 1px solid rgb(106, 105, 104)!important;;
+    border-right: 1px solid rgb(106, 105, 104)!important;
+    border-left: 1px solid rgb(106, 105, 104)!important;
+    border-radius: 5px;
+    justify-content: space-between; 
+
+}
+.landingpage_bodyframe{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    background-color: #183247;
+    margin-bottom: 20px;
+}
+.landingpage_body1{
+    position: sticky;
+    flex:0.60;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-right: 1px solid rgb(106, 105, 104)!important;
+    justify-content: space-evenly;
+    background-color: white;
+
+}
+.landingpage_body1>h1{
+    font-size: 20px;
+    font-weight: 600;
+    color: rgb(106, 105, 104);
+    margin-left: -420px;
+    margin-top: -30px;   
+    
+}
+.credentials{
+    position: sticky;
+
+     margin-left: -450px;
+    margin-top: -50px; 
+}
+
+
+.credentials> h5 {
+    margin-bottom: 5px;
+}
+
+.credentials> input {
+    height: 30px;
+    margin-bottom: 8px;
+    background-color: white;
+    width: 200%;
+    border: 1px solid rgb(106, 105, 104);
+    border-radius: 5px;
+  }
+
+.forgotpassword {
+    margin-left: -50px;
+    margin-bottom: 20px;
+    color: rgb(0, 255, 153);
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+    
+}
+.signInButton{
+    margin-left: -100px;
+    margin-bottom: 20px;
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+    background-color: rgb(0, 255, 153);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 5px;
+    border: 1px solid rgb(0, 255, 153);
+
+}
+.landingpage_body2{
+    display: flex;
+    align-items: center;
+      margin-left: -340px;
+    margin-top: -50px; 
+}
+.agentloginlink{
+    color: rgb(0, 255, 153);
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+    
+}
+.linelinks{
+color: rgb(106, 105, 104);
+text-decoration: none;
+}
+.areyou{
+    color: rgb(19, 19, 19);
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+}
+.landingpage_body3{
+    position: sticky;
+    flex:0.40;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color:rgb(214, 214, 214);
+   
+}
+.landingpage_body5>h2{
+
+    color: rgb(106, 105, 104);
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+    margin-right: 10px;
+   
+}
+.landingpage_body4>h1{
+  font-size: 20px;
+    color: rgb(106, 105, 104);
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+      
+    
+}
+.landingpage_body4{
+    display: flex;
+    margin-left: -200px;
+    margin-top: 15px;
+    
+}
+.landingpage_body5{
+    align-items: center;
+    display: flex;
+    margin-left: -150px;
+    
+    
+}
+.landingpage_body6{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 15px;
+    align-items: center;
+    display: flex;   
+}
+.landingpage_body6 >p{
+    color: rgb(106, 105, 104);
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+    margin-right: 10px; 
+  
+}
+ .linksignup1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    border-radius: 5px;
+    background-color: rgb(106, 105, 104);
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+  text-decoration: none;
+
+ }
+ 
+ 
+    .linksignup1:hover{
+        background-color: rgb(0, 255, 153);
+        color: white;
+        border: 1px solid rgb(0, 255, 153);
+        transition: all 0.3s ease-in-out;
+    }
+
+
+    .button_container1{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 20px;
+        margin-left: 100px;
+
+     }
+
+     
+.landingpage_body_signup{
+  height:70vh;
+  width: 90%;
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-radius: 5px;
+    justify-content: space-between; 
+
+}
+.landingpage_bodyframe_signup{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    background-color: #183247;
+    margin-bottom: 20px;
+}
+.landingpage_body1_signup{
+    position: sticky;
+    flex:0.60;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-right: 1px solid rgb(106, 105, 104)!important;
+    border-radius: 5px;
+    justify-content: space-evenly;
+    background-color: white;
+
+}
+.landingpage_body1_signup>h1{
+    font-size: 20px;
+    font-weight: 600;
+    color: rgb(106, 105, 104);
+    margin-left: -420px;
+    margin-top: -30px;   
+    
+}

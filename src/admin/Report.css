@@ -1,0 +1,199 @@
+.report{
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     background-color: #183247;
+     width: 100%;
+     height: 100vh;
+}
+.back_button1{
+margin-left: -830px;
+}
+.report_header{
+    display: flex;
+    padding-bottom: 10px;
+    position: sticky;
+    justify-content: space-between;   
+}
+.total_header_span1{
+    flex: 1; 
+     padding-bottom: 10px; 
+
+     
+}
+.total_ticket_span>h2{
+     font-weight: 400;
+
+    color: rgb(0, 255, 153);
+     
+}
+
+.total_header_span1>h1{
+      font-weight: 400;
+    color: rgb(0, 255, 153);
+    
+    margin-right: -220px;   
+}
+.ticket_report{
+    display:flex;
+    padding: 20px;  
+}
+.open_tickets{ 
+    display: flex;
+    flex-direction: column;
+    border-right: 2px solid rgb(106, 105, 104);
+    border-bottom: 2px solid rgb(106, 105, 104);
+    border-top: 2px solid rgb(106, 105, 104);
+    height: 200px;
+}
+
+.total_ticket_span{
+     
+    font-family: sans-serif;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 120%;
+    border-bottom: 1px solid rgb(106, 105, 104);
+
+}
+.total_ticket_span1>h1{
+font-weight: 200;
+    color: #fff;
+}
+.total_ticket_span1>h2{
+       font-weight: 400;
+
+    color: rgb(0, 255, 153);
+     
+
+}
+.total_ticket_span1{
+     font-family: sans-serif;
+    padding-left: 20px;
+    padding-right: 20px;
+
+
+
+}
+
+.closed_tickets{
+    display: flex;
+    flex-direction: column;
+    border-right: 2px solid rgb(106, 105, 104);
+    border-bottom: 2px solid rgb(106, 105, 104);
+    border-top: 2px solid rgb(106, 105, 104);
+    height: 200px;
+    
+
+}
+.total_tickets{
+    display: flex;
+    flex-direction: column;
+    border-right: 2px solid rgb(106, 105, 104);
+    border-bottom: 2px solid rgb(106, 105, 104);
+    border-top: 2px solid rgb(106, 105, 104);
+    border-left: 2px solid rgb(106, 105, 104);
+    height: 200px;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.rating_report{
+    display:flex;
+    padding: 50px;
+
+    margin-left:50px;
+
+}
+.tickets_ratings{ 
+    display: flex;
+    flex-direction: column;
+    padding-right: 40px;
+    border-right: 2px solid rgb(106, 105, 104);
+    border-bottom: 2px solid rgb(106, 105, 104);
+    border-top: 2px solid rgb(106, 105, 104);
+    border-left: 2px solid rgb(106, 105, 104);
+    height: 200px;
+    
+
+}
+.total_ratings{
+     display: flex;
+    flex-direction: column;
+    border-right: 2px solid rgb(106, 105, 104);
+    border-bottom: 2px solid rgb(106, 105, 104);
+    border-top: 2px solid rgb(106, 105, 104);
+    height: 200px;
+
+    
+
+
+}
+.good_rating{
+     display: flex;
+    flex-direction: column;
+    border-right: 2px solid rgb(106, 105, 104);
+    border-bottom: 2px solid rgb(106, 105, 104);
+    border-top: 2px solid rgb(106, 105, 104);
+    
+
+
+}
+.average_rating{
+     display: flex;
+    flex-direction: column;
+    border-right: 2px solid rgb(106, 105, 104);
+    border-bottom: 2px solid rgb(106, 105, 104);
+    border-top: 2px solid rgb(106, 105, 104);
+    
+}
+
+
+.poor_rating{
+     display: flex;
+    flex-direction: column;
+    border-right: 2px solid rgb(106, 105, 104);
+    border-bottom: 2px solid rgb(106, 105, 104);
+    border-top: 2px solid rgb(106, 105, 104);
+    
+
+
+}

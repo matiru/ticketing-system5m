@@ -1,0 +1,15 @@
+.agent_info{
+margin-bottom: 20px;
+display: flex;
+padding: 10px;
+align-items: center;
+justify-content: space-between;
+border-bottom: 1px solid rgb(106, 105, 104)!important;;
+border-top: 1px solid rgb(106, 105, 104)!important;;
+border-right: 1px solid rgb(106, 105, 104)!important;
+border-left: 1px solid rgb(106, 105, 104)!important; 
+border-radius: 5px!important;
+margin-left: 20px;
+margin-right:20px;
+background-color: lightgrey;
+}
