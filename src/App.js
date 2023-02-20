@@ -8,8 +8,8 @@ import Profile from "../src/admin/Profile";
 import Profile2 from "../src/admin/Profile2";
 import Profile1 from "../src/customers/Profile1";
 import ClosedTickets from "../src/admin/ClosedTickets";
+import AgentProgressed from "../src/admin/AgentProgressed";
 import ClosedTickets2 from "../src/admin/ClosedTickets2";
-
 import AllAgentReport from "../src/admin/AllAgentReport";
 import Report from "../src/admin/Report";
 import AdminAgent from "../src/admin/AdminAgent";
@@ -21,6 +21,8 @@ import AddAgent from "../src/admin/AddAgent";
 import { useStateValue } from "../src/Redux/StateProvider";
 import LandingPage from "./LandingPage";
 import AdminLogin from "./AdminLogin";
+import TicketsInProgress from "../src/customers/TicketsInProgress";
+import AdminProgressedTickets from "../src/admin/Adminpro";
 
 function App() {
   const [{ user }, dispatch] = useStateValue();
@@ -59,6 +61,11 @@ function App() {
             path="/adminagent/closedtickets"
             element={<ClosedTickets2 />}
           ></Route>
+          <Route
+            path="/adminagent/progressedtickets"
+            element={<AdminProgressedTickets />}
+          ></Route>
+
           <Route path="/adminagent/agents" element={<AddAgent />}></Route>
           <Route
             path="/adminagent/agentsreport"
@@ -70,10 +77,17 @@ function App() {
           <Route path="/admin" element={<AdminLogin />}></Route>
           <Route path="/agentdashboard/agents" element={<AddAgent />}></Route>
           <Route path="/customer/mytickets" element={<ClientTickets />}></Route>
+          <Route path="/customer/myprogressedtickets" element={<TicketsInProgress/>}></Route>
+     
           <Route path="/customer/opentickets" element={<OpenTickets />}></Route>
           <Route
             path="/agentdashboard/closedtickets"
             element={<ClosedTickets />}
+          ></Route>
+         
+          <Route
+            path="/agentdashboard/progressedtickets"
+            element={<AgentProgressed />}
           ></Route>
           <Route path="/agentdashboard/profile" element={<Profile />}></Route>
           <Route path="/agentdashboard/report" element={<Report />}></Route>

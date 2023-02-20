@@ -25,7 +25,7 @@ function SuperAgent() {
   useEffect(() => {
     db.collection("tickets")
       .where("agent", "==", user.email)
-      .where("status", "==", "open")
+      .where("status", "==", "open")   
       .onSnapshot((snapshot) => {
         console.log(snapshot.docs.map((doc) => doc.data().ticket));
         setTickets(
@@ -47,6 +47,13 @@ function SuperAgent() {
           <h3>{user.email}</h3>
         </div>
         <div className="agentdashboard_sidebar_nav">
+        <div className="button_container">
+            <Link to="progressedtickets" className="header_link">
+              <span className="span_tickets">
+                <h2>Tickets In Progress</h2>
+              </span>
+            </Link>
+          </div>
           <div className="button_container">
             <Link to="closedtickets" className="header_link">
               <span className="span_tickets">

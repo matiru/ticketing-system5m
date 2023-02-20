@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { auth, db } from "../database/firebase";
 import { useStateValue } from "../Redux/StateProvider";
-import {query, limit, getDocs, updateDoc,getCountFromServer } from 'firebase/firestore';
+import {query, limit, getDocs, updateDoc,getCountFromServer , where} from 'firebase/firestore';
 import "firebase/compat/firestore";
 import { useNavigate } from "react-router-dom";
 
@@ -27,19 +27,29 @@ function RaiseTicket({ id }) {
   };
 
   const submit = async (e) => {
-    // get agents
+    
     e.preventDefault();
 
+    const getTickets = query(collection(db, "tickets"));
+    const ticketCount = await getCountFromServer(getTickets);
+    const allTicketsCount = ticketCount.data().count;
+
     const docRef = await addDoc(collection(db, "tickets"), {
+     
+      id: allTicketsCount + 1,
       subject: input,
       description: input1,
-      assigned: false,
+      time : serverTimestamp(),
       status: "open",
       customer: user.email,
       timestamp: serverTimestamp(),
+      closing_timestamp: "",
+      date: new Date().toLocaleDateString(),
+
     });
     collection(db, "agents");
-    const query_ = query(collection(db, "agents"));
+    
+    const query_ = query(collection(db, "agents"), where("isActive", "==", true));
     const snapshot = await getCountFromServer(query_);
     console.log("count: ", snapshot.data().count);
     const agentCount = snapshot.data().count;
@@ -52,7 +62,7 @@ function RaiseTicket({ id }) {
       const nextAgent = doc.data().nextagent;
       console.log("next agent: ", nextAgent);
 
-      const q = query(collection(db, "agents"), limit(nextAgent));
+      const q = query(collection(db, "agents"), where("isActive", "==", true), limit(nextAgent));
       //const querySnapshot = await getDocs(q)is a promise so we need to use await to get the data
       const querySnapshot = await getDocs(q);
 
@@ -120,6 +130,13 @@ function RaiseTicket({ id }) {
             <Link to="mytickets" className="header_link">
               <span className="span_mytickets">
                 <h2>My Open Tickets</h2>
+              </span>
+            </Link>
+          </div>
+          <div className="button_container">
+            <Link to="myprogressedtickets" className="header_link">
+              <span className="span_mytickets">
+                <h2>Tickets In Progess</h2>
               </span>
             </Link>
           </div>

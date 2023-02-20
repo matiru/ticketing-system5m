@@ -11,7 +11,7 @@ import { useParams } from "react-router-dom";
 import { Modal } from "@mui/material";
 import { serverTimestamp } from "firebase/firestore";
 
-function Ticket_infoa({ subject, customer, status, description, id, rate }) {
+function Ticket_infoa3({ subject, customer, status, description, id, rate }) {
   const [input, setInput] = useState("");
   const [seed, setSeed] = useState("");
   const { roomId } = useParams();
@@ -54,7 +54,7 @@ function Ticket_infoa({ subject, customer, status, description, id, rate }) {
 
   return (
     <div onClick={() => setOpen(true)}>
-      {status === "open" ? (
+      {status === "In progress" ? (
         <div className="ticket_infoa">
           <Modal
             className="signup-modal"
@@ -196,4 +196,4 @@ function Ticket_infoa({ subject, customer, status, description, id, rate }) {
   );
 }
 
-export default Ticket_infoa;
+export default Ticket_infoa3;

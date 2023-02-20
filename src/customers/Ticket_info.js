@@ -10,7 +10,7 @@ import { useParams } from "react-router-dom";
 import "./ClientTickets.css";
 import { db } from "../database/firebase";
 import { Modal } from "@mui/material";
-
+import { serverTimestamp } from "firebase/firestore";
 function Ticket_info({ subject, agent, status, id, description, rate }) {
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
@@ -50,6 +50,7 @@ function Ticket_info({ subject, agent, status, id, description, rate }) {
       .doc(id)
       .update({
         status: "closed",
+        closing_timestamp: serverTimestamp(),
       })
       .then(function () {
         console.log("status updated");
@@ -63,6 +64,7 @@ function Ticket_info({ subject, agent, status, id, description, rate }) {
       name: user.displayName,
       email: user.email,
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      
     });
 
     setInput("");
@@ -75,7 +77,7 @@ function Ticket_info({ subject, agent, status, id, description, rate }) {
 
   return (
     <div classname="ticketholder" onClick={() => setOpen(true)}>
-      {status === "open" ? (
+      {status === "In progress"  ? (
         <div className="ticket_info">
           <Modal
             className="signup-modal"
@@ -107,7 +109,7 @@ function Ticket_info({ subject, agent, status, id, description, rate }) {
                   <h5>agent-email : </h5>
                   {agent}
                 </div>
-                <div className="ticket_subject">
+                {/* <div className="ticket_subject">
                   <h5>rate your service : </h5>
                   <select
                     value={input1}
@@ -123,7 +125,7 @@ function Ticket_info({ subject, agent, status, id, description, rate }) {
                   <button onClick={rateTicket} className="">
                     Rate
                   </button>
-                </div>
+                </div> */}
                 <div className="chat_body">
                   {messages.map((message) => (
                     <p

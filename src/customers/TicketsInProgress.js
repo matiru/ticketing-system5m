@@ -7,14 +7,14 @@ import Ticket_info from "./Ticket_info";
 import { useStateValue } from "../Redux/StateProvider";
 //import { query, collection, onSnapshot } from "firebase/firestore";
 
-function ClientTickets() {
+function TicketsInProgress() {
   const [tickets, setTickets] = useState([]);
   const [{ user }, dispatch] = useStateValue();
   
   useEffect(() => {
     db.collection("tickets")
       .where("customer", "==", user.email)
-      .where("status", "==", "open")
+      .where("status", "==", "In progress")
       // order by timestamp
       .onSnapshot((snapshot) => {
         console.log(snapshot.docs.map((doc) => doc.data().ticket));
@@ -64,4 +64,4 @@ function ClientTickets() {
   );
 }
 
-export default ClientTickets;
+export default TicketsInProgress;
