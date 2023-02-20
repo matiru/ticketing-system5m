@@ -8,6 +8,7 @@ import { db } from "../database/firebase";
 import Report_Info from "./Report_Info";
 import "../customers/RaiseTicket.css";
 import { query, collection, getDocs, where } from "firebase/firestore";
+import { Button } from "@mui/material";
 
 function AllAgentReport() {
   const [{ user }, dispatch] = useStateValue();
@@ -56,6 +57,7 @@ function AllAgentReport() {
   const [unsatisfied, setUnsatisfied] = useState(0);
   const [modsatisfied, setModsatisfied] = useState(0);
   const [modalRating] = useState("");
+  const[agentState , setAgentState] = useState("");
 
   // compare the count of satisfied,unsatisfied and modsatisfied tickets  return the highest value emoji as modal rating
   useEffect(() => {
@@ -67,6 +69,45 @@ function AllAgentReport() {
       modalRating("moderately_satisfied😐");
     }
   }, []);
+  useEffect (() => {
+
+    db.collection("agents").where("email","==",input).onSnapshot((snapshot) => {
+      // if isActive is true then set agentState to active else set agentState to inactive
+      snapshot.docs.map((doc) => {
+        if(doc.data().isActive){
+          setAgentState("Active");
+        }else{
+          setAgentState("Inactive");
+        }
+      })
+
+    })
+
+  },[input])
+
+const handleAgentStatus = (e) => {
+  e.preventDefault();
+  if(agentState === "Active"){
+    db.collection("agents").where("email","==",input).get().then((snapshot) => {
+      snapshot.docs.map((doc) => {
+        db.collection("agents").doc(doc.id).update({
+          isActive : false
+        })
+      })
+    })
+  }else{
+    db.collection("agents").where("email","==",input).get().then((snapshot) => {
+      snapshot.docs.map((doc) => {
+        db.collection("agents").doc(doc.id).update({
+          isActive : true
+        })
+      })
+    })
+  }
+}
+
+      
+
   useEffect(() => {
     const q = query(
       collection(db, "tickets"),
@@ -137,6 +178,9 @@ function AllAgentReport() {
               <option value={agent.email}>{agent.email}</option>
             ))}
           </select>
+          <h1>{agentState}</h1>
+          <span>{agentState}</span>
+          <Button onClick={handleAgentStatus}>Change status</Button>
           <div className="ticket_report">
             <div className="total_tickets">
               <span className="total_ticket_span">

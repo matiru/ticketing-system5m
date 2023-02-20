@@ -13,9 +13,11 @@ function ClientTickets() {
   
   useEffect(() => {
     db.collection("tickets")
+        
       .where("customer", "==", user.email)
       .where("status", "==", "open")
-      // order by timestamp
+      . orderBy("timestamp", "desc")
+       
       .onSnapshot((snapshot) => {
         console.log(snapshot.docs.map((doc) => doc.data().ticket));
         setTickets(
