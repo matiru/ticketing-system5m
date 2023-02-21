@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 function RaiseTicket({ id }) {
   const [{ user }, dispatch] = useStateValue();
 
+  
   const navigate = useNavigate();
 
   const handleAuthenticaton = () => {
@@ -102,7 +103,12 @@ function RaiseTicket({ id }) {
     window.alert(
       "Ticket successfully created our agent will contact you soon ! Be sure to check your open tickets for communication with the the agent!"
     );
+    return nextAgent;
   };
+
+  // assign nextAgent return value  to a variable
+  const nextAgent = submit();
+  console.log("next agent: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" ,nextAgent);
 
   const [input, setInput] = useState("");
 

@@ -22,8 +22,8 @@ function AdminAgent() {
 
   useEffect(() => {
     db.collection("tickets")
-      .where("status", "==", "open")
-      . orderBy("timestamp", 'asc')
+       .where("status", "==", "open")
+      // . orderBy("timestamp", 'asc')
       .onSnapshot((snapshot) => {
         console.log(snapshot.docs.map((doc) => doc.data().ticket));
         setTickets(

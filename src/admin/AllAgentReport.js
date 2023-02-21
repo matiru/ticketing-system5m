@@ -7,7 +7,7 @@ import "./Report.css";
 import { db } from "../database/firebase";
 import Report_Info from "./Report_Info";
 import "../customers/RaiseTicket.css";
-import { query, collection, getDocs, where } from "firebase/firestore";
+import { query, collection, getDocs, where ,updateDoc,getCountFromServer,limit} from "firebase/firestore";
 import { Button } from "@mui/material";
 
 function AllAgentReport() {
@@ -105,6 +105,53 @@ const handleAgentStatus = (e) => {
     })
   }
 }
+
+// use effect triggered after handleAgentStatus is called and agentState is updated
+// reassign open tickets to other agents if agent is inactive
+
+useEffect(() => {
+  
+  if(agentState === "Inactive"){
+    db.collection("tickets").where("agent","==",input).get().then((snapshot) => {
+      snapshot.docs.map((doc) => {
+        db.collection("tickets").doc(doc.id).update({
+          agent : ""
+        })
+      })
+    })
+
+   // get all agents emails where isActive is true and store in array
+
+    db.collection("agents").where("isActive","==",true).get().then((snapshot) =>  
+    {
+      const emails = snapshot.docs.map((doc) => doc.data().email);
+      console.log(emails);
+      // get all open tickets where agent is empty and store in array
+      db.collection("tickets").where("agent","==","").get().then((snapshot) => {
+        const tickets = snapshot.docs.map((doc) => doc.id);
+        console.log(tickets);
+   
+        // assign open tickets to agents in round robin fashion
+        for(let i = 0; i < tickets.length; i++){
+          db.collection("tickets").doc(tickets[i]).update({
+            agent : emails[i % emails.length]
+          })
+        }
+      })
+    })
+
+
+
+
+
+
+
+
+
+  }
+},[agentState])
+ 
+
 
       
 
