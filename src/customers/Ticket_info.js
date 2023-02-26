@@ -43,19 +43,84 @@ function Ticket_info({ subject, agent, status, id, description, rate }) {
         });
     };
 
-  const closeTicket = (e) => {
-    e.preventDefault();
+  // const closeTicket = (e) => {
+  //   e.preventDefault();
 
-    db.collection("tickets")
-      .doc(id)
-      .update({
-        status: "closed",
-        closing_timestamp: serverTimestamp(),
-      })
-      .then(function () {
-        console.log("status updated");
+  //   db.collection("tickets")
+  //     .doc(id)
+  //     .update({
+  //       status: "closed",
+  //       closing_timestamp: serverTimestamp(),
+  //     })
+  //     .then(function () {
+  //       console.log("status updated");
+  //     });
+  // };
+  const [isLoading, setIsLoading] = useState(false);
+
+const closeTicket = (e) => {
+  e.preventDefault();
+  
+  setIsLoading(true);
+
+  // Get the agent email from the ticket
+  const agentEmail = agent;
+
+  // Assign the next unassigned ticket to the agent
+  db.collection("tickets")
+    .where("assigned", "==", false)
+    .orderBy("queueNumber", "asc")
+    .limit(1)
+    .get()
+    .then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        const ticketId = doc.id;
+        doc.ref.update({
+          agent: agentEmail
+        }).then(() => {
+          console.log(`Ticket ${ticketId} assigned to agent ${agentEmail}`);
+
+          // Update the ticket status and closing timestamp
+          db.collection("tickets")
+            .doc(id)
+            .update({
+              status: "closed",
+              closing_timestamp: serverTimestamp(),
+            })
+            .then(function () {
+              console.log("ticket status updated");
+
+              // Update the agent's isActive field
+              db.collection("agents")
+                .where("email", "==", agentEmail)
+                .get()
+                .then((querySnapshot) => {
+                  querySnapshot.forEach((doc) => {
+                    doc.ref.update({
+                      isActive: true
+                    }).then(function () {
+                      console.log("agent isActive updated");
+                      setIsLoading(false);
+                    });
+                  });
+                })
+                .catch((error) => {
+                  console.log("Error updating agent isActive: ", error);
+                  setIsLoading(false);
+                });
+            })
+            .catch((error) => {
+              console.log("Error updating ticket status: ", error);
+              setIsLoading(false);
+            });
+        });
       });
-  };
+    })
+    .catch((error) => {
+      console.log("Error assigning ticket to agent: ", error);
+      setIsLoading(false);
+    });
+};
 
   const sendMessage = (e) => {
     e.preventDefault();

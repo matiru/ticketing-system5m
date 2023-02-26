@@ -25,6 +25,9 @@ function AdminAgent() {
        .where("status", "==", "open")
       // . orderBy("timestamp", 'asc')
       .onSnapshot((snapshot) => {
+        tickets.sort((a, b) => {
+          return a.data.timestamp.seconds - b.data.timestamp.seconds;
+        });
         console.log(snapshot.docs.map((doc) => doc.data().ticket));
         setTickets(
           snapshot.docs.map((doc) => ({

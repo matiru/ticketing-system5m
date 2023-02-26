@@ -7,7 +7,7 @@ import "./Report.css";
 import { db } from "../database/firebase";
 import Report_Info from "./Report_Info";
 import "../customers/RaiseTicket.css";
-import { query, collection, getDocs, where ,updateDoc,getCountFromServer,limit} from "firebase/firestore";
+import { query, collection, getDocs, where ,updateDoc,getCountFromServer,limit, orderBy} from "firebase/firestore";
 import { Button } from "@mui/material";
 
 function AllAgentReport() {
@@ -17,12 +17,97 @@ function AllAgentReport() {
   //fetch all agents emails and corresponding tickets from db and store in array  of objects
   const [agents, setAgents] = useState([]);
 
+  const [tickets , SetTickets] = useState([]);
+
+  // fetch all tickets from db and store in array of objects
+  // useEffect  (() => {
+  //   db.collection("tickets" ).orderBy("id").onSnapshot((snapshot) => {
+  //     console.log(snapshot.docs.map((doc) => doc.data().timestamp))
+  //     SetTickets(snapshot.docs.map((doc) => ({
+
+  //       id : doc.id,
+  //       data : doc.data(),
+
+
+  //         date: doc.data().date,
+  //         subject : doc.data().subject,
+  //         state : doc.data().state,
+  //         timeOpen1 : doc.data().timestamp,
+
+          
+  //         // convert timeOpen1 to date format
+
+          
+
+
+  //         timeClosed : doc.data().closing_timestamp,
+  //         timeTaken : doc.data().timeClosed - doc.data().timeOpen,
+  //         agent : doc.data().agent,
+      
+  //     })));
+  //   })
+    
+  //     console.log(tickets)
+  // },[])
+
+  useEffect  (() => {
+
+  db.collection("tickets").where("status" , "==" , "closed" ) 
+  .onSnapshot((snapshot) => {
+    
+      const tickets = snapshot.docs.map((doc) => {
+        const timestamp = doc.data().solving_start_time;
+        const closing_timestamp = doc.data().closing_timestamp;
+        const date_closed = new Date(closing_timestamp.seconds * 1000);
+        const date_opened = new Date(timestamp.seconds * 1000);
+        const formattedDate = date_opened.toLocaleDateString();
+        const formattedTime = date_opened.toLocaleTimeString();
+        const formattedTime_close = date_closed.toLocaleTimeString();
+        const timeTaken = (date_closed.getTime() - date_opened.getTime()) / 1000;
+
+        function formatTimeTaken(timeTaken) {
+          const hours = Math.floor(timeTaken / 3600);
+          const minutes = Math.floor((timeTaken % 3600) / 60);
+          const seconds = timeTaken % 60;
+          return `${hours}h ${minutes}m ${seconds}s`;
+        }
+       
+       // sort tickets by date
+      
+     
+      return {
+        id: doc.id,
+        data: doc.data(),
+        date: formattedDate,
+        status: doc.data().status,
+        timeOpen:  formattedTime,
+        subject: doc.data().subject,
+        state: doc.data().state,
+        timeClosed: formattedTime_close,
+        timeTaken:formatTimeTaken(timeTaken),
+        agent: doc.data().agent,
+      };
+    });
+    SetTickets(tickets);
+  });
+  
+},[])
+ 
+//  sort tickets by date
+ tickets.sort((a, b) => {
+  return a.date - b.date;
+});
+
+ tickets.sort((a, b) => {
+  return a.data.timestamp.seconds - b.data.timestamp.seconds;
+});
+
+
   useEffect(() => {
     db.collection("agents").onSnapshot((snapshot) => {
       console.log(snapshot.docs.map((doc) => doc.data().email));
       setAgents(
         snapshot.docs.map((doc) => ({
-          uid: user.uid,
           id: doc.id,
           data: doc.data(),
           email: doc.data().email,
@@ -300,6 +385,38 @@ useEffect(() => {
           </div>
         </div>
       </div>
+
+      <table>
+        // populate table with values from ticket array 
+        count : <h3>{tickets.length}</h3>
+        <tr>
+          <th>DATE</th>
+          <th>SUBJECT</th>
+          <th>STATUS</th>
+          <th>TIME OPEN</th>
+          <th>TIME CLOSED</th>
+          <th>TIME TAKEN</th>
+          <th>AGENT</th>
+          <th>RATING</th>
+        </tr>
+        {tickets.map((ticket) => (
+          <tr>
+            <td>{ticket.date}</td>
+            <td>{ticket.subject}</td>
+            <td>{ticket.status}</td>
+            <td>{ticket.timeOpen}</td>
+            <td>{ticket.timeClosed}</td> 
+            <td>{ticket.timeTaken}</td>
+            <td>{ticket.agent}</td>
+            <td>{ticket.rate}</td>
+          </tr>
+        ))}
+
+
+    
+
+    </table>
+
     </div>
   );
 }

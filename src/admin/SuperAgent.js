@@ -25,8 +25,12 @@ function SuperAgent() {
   useEffect(() => {
     db.collection("tickets")
       .where("agent", "==", user.email)
-      .where("status", "==", "open")   
+      // .where("status", "==", "open")   
       .onSnapshot((snapshot) => {
+        tickets.sort((a, b) => {
+          return a.data.timestamp.seconds - b.data.timestamp.seconds;
+        });
+        
         console.log(snapshot.docs.map((doc) => doc.data().ticket));
         setTickets(
           snapshot.docs.map((doc) => ({
@@ -38,6 +42,8 @@ function SuperAgent() {
         );
       });
   }, []);
+
+  
 
   return (
     <div className="agentdashboard">

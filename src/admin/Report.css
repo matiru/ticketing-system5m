@@ -1,4 +1,4 @@
-.report{
+/* .report{
      display: flex;
      flex-direction: column;
      align-items: center;
@@ -196,4 +196,156 @@ font-weight: 200;
     
 
 
-}
+} */
+
+
+
+
+
+.report {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #183247;
+    width: 100%;
+    min-height: 100vh;
+  }
+  
+  .back_button1 {
+    margin-left: -830px;
+  }
+  
+  .report_header {
+    display: flex;
+    padding: 10px;
+    position: sticky;
+    top: 0;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+  }
+  
+  .total_header_span1 {
+    flex: 1;
+    padding-bottom: 10px;
+  }
+  
+  .total_header_span1 > h1 {
+    font-weight: 400;
+    color: rgb(0, 255, 153);
+    margin-right: -220px;
+  }
+  
+  .total_ticket_span > h2,
+  .total_ticket_span1 > h2 {
+    font-weight: 400;
+    color: rgb(0, 255, 153);
+  }
+  
+  .total_ticket_span1 > h1 {
+    font-weight: 200;
+    color: #fff;
+  }
+  
+  .ticket_report {
+    display: flex;
+    padding: 20px;
+    width: 100%;
+    max-width: 1200px;
+    flex-wrap: wrap;
+  }
+  
+  .open_tickets,
+  .closed_tickets,
+  .total_tickets,
+  .tickets_ratings,
+  .total_ratings,
+  .good_rating,
+  .average_rating,
+  .poor_rating {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid rgb(106, 105, 104);
+    height: 200px;
+    margin: 10px;
+    flex: 1;
+  }
+  
+  .total_ticket_span,
+  .total_ticket_span1 {
+    font-family: sans-serif;
+    padding: 0 20px;
+    font-size: 120%;
+    border-bottom: 1px solid rgb(106, 105, 104);
+  }
+  
+  .rating_report {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 50px;
+    width: 100%;
+    max-width: 1200px;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .ticket_report {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .open_tickets,
+    .closed_tickets,
+    .total_tickets {
+      width: 100%;
+      margin: 10px 0;
+    }
+  
+    .total_header_span1 > h1 {
+      margin-right: -20px;
+    }
+  
+    .report_header {
+      padding: 5px;
+    }
+  
+    .rating_report {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .tickets_ratings,
+    .total_ratings,
+    .good_rating,
+    .average_rating,
+    .poor_rating {
+      width: 100%;
+      margin: 10px 0;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .total_header_span1 > h1 {
+      font-size: 18px;
+      margin-right: -10px;
+    }
+  
+    .total_ticket_span,
+    .total_ticket_span1 {
+      font-size: 100%;
+    }
+  
+    .ticket_report {
+      padding: 10px;
+    }
+  
+    .open_tickets,
+    .closed_tickets,
+    .total_tickets,
+    .tickets_ratings,
+    .total_ratings,
+    .good_rating,
+    .average_rating,
+    .poor_rating {
+      height: 150px;
+    }
+  }

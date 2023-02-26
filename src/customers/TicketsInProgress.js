@@ -17,6 +17,9 @@ function TicketsInProgress() {
       .where("status", "==", "In progress")
       // order by timestamp
       .onSnapshot((snapshot) => {
+        tickets.sort((a, b) => {
+          return a.data.timestamp.seconds - b.data.timestamp.seconds;
+        });
         console.log(snapshot.docs.map((doc) => doc.data().ticket));
         setTickets(
           snapshot.docs.map((doc) => ({
@@ -26,7 +29,7 @@ function TicketsInProgress() {
           }))
         );
       });
-  });
+  }, []);
 
   return (
     <div className="client_tickets">

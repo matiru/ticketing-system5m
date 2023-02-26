@@ -308,3 +308,75 @@ border-right: 1px solid rgb(106, 105, 104)!important;
 border-left: 1px solid rgb(106, 105, 104)!important; 
 border-radius: 2px;
 }
+
+
+
+
+
+
+
+
+#tabletitle{
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: #333;
+  border: 1px;
+}
+
+
+table {
+
+  border: 1px solid ;
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 80%;
+  margin:20px;
+  margin-right:20px;
+  padding: 20px;
+}
+
+
+td, th {
+  border: 1px solid ;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: lightblue;
+}
+
+
+.loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.loading:before {
+  content: "";
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  border-top-color: #000;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
