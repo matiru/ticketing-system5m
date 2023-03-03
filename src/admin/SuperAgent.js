@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Avatar } from "@mui/material";
 import "./SuperAgent.css";
-import Ticket_infoa from "../customers/Ticket_infoa";
+import Ticket_infoa1 from "../customers/Ticket_infoa1";
 import { Link } from "react-router-dom";
 import ArrowCircleLeftOutlinedIcon from "@mui/icons-material/ArrowCircleLeftOutlined";
 import { useStateValue } from "../Redux/StateProvider";
@@ -25,7 +25,7 @@ function SuperAgent() {
   useEffect(() => {
     db.collection("tickets")
       .where("agent", "==", user.email)
-      // .where("status", "==", "open")   
+      .where("status", "==", "open")   
       .onSnapshot((snapshot) => {
         tickets.sort((a, b) => {
           return a.data.timestamp.seconds - b.data.timestamp.seconds;
@@ -52,32 +52,32 @@ function SuperAgent() {
           <Avatar src="https://avatars.dicebear.com/api/human/:matiru5810.svg" />
           <h3>{user.email}</h3>
         </div>
-        <div className="agentdashboard_sidebar_nav">
-        <div className="button_container">
-            <Link to="progressedtickets" className="header_link">
+        <div className="sidebar">
+          <div className="button_container">
+            <Link to="profile" className="header_link">
               <span className="span_tickets">
-                <h2>Tickets In Progress</h2>
+                <h2>My Profile</h2>
               </span>
             </Link>
           </div>
           <div className="button_container">
-            <Link to="closedtickets" className="header_link">
+            <Link to="progressedtickets" className="header_link">
               <span className="span_tickets">
-                <h2>Closed Tickets</h2>
+              <h2>My Open Tickets</h2>
+              </span>
+            </Link>
+          </div>
+          <div className="button_container">
+            <Link to="closedtickets"className="header_link">
+              <span className="span_tickets">
+              <h2>Closed Tickets</h2>
               </span>
             </Link>
           </div>
           <div className="button_container">
             <Link to="report" className="header_link">
               <span className="span_tickets">
-                <h2>Report</h2>
-              </span>
-            </Link>
-          </div>
-          <div className="button_container">
-            <Link to="profile" className="header_link">
-              <span className="span_tickets">
-                <h2>My profile</h2>
+              <h2>Report</h2>
               </span>
             </Link>
           </div>
@@ -94,16 +94,11 @@ function SuperAgent() {
           </div>
           <div className=" agentdashboard_tickets_header_title">
             <h2>Total Open Tickets:{tickets.length}</h2>
-
-            {/* <div className="button_wrap">
-              <button className="tickets_open">open tickets</button>
-              <button className="tickets_closed"> closed tickets</button>
-            </div> */}
           </div>
         </div>
         <div className="agentdashboard_tickets_ticketsdisplay">
           {tickets.map((ticket) => (
-            <Ticket_infoa
+            <Ticket_infoa1
               key={ticket.id}
               id={ticket.id}
               assigned={ticket.data.assigned}

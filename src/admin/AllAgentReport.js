@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import "../customers/ClientTickets.css";
+import "./AllAgentReports.css";
 import ArrowCircleLeftOutlinedIcon from "@mui/icons-material/ArrowCircleLeftOutlined";
 import { useStateValue } from "../Redux/StateProvider";
-import "./Report.css";
 import { db } from "../database/firebase";
-import Report_Info from "./Report_Info";
-import "../customers/RaiseTicket.css";
 import { query, collection, getDocs, where ,updateDoc,getCountFromServer,limit, orderBy} from "firebase/firestore";
 import { Button } from "@mui/material";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
 function AllAgentReport() {
   const [{ user }, dispatch] = useStateValue();
@@ -17,38 +15,37 @@ function AllAgentReport() {
   //fetch all agents emails and corresponding tickets from db and store in array  of objects
   const [agents, setAgents] = useState([]);
 
+  const [tickets1, setTickets1] = useState([]);
+
   const [tickets , SetTickets] = useState([]);
 
-  // fetch all tickets from db and store in array of objects
-  // useEffect  (() => {
-  //   db.collection("tickets" ).orderBy("id").onSnapshot((snapshot) => {
-  //     console.log(snapshot.docs.map((doc) => doc.data().timestamp))
-  //     SetTickets(snapshot.docs.map((doc) => ({
-
-  //       id : doc.id,
-  //       data : doc.data(),
 
 
-  //         date: doc.data().date,
-  //         subject : doc.data().subject,
-  //         state : doc.data().state,
-  //         timeOpen1 : doc.data().timestamp,
 
-          
-  //         // convert timeOpen1 to date format
+  useEffect(() => {
+    const fetchData = async () => {
+      const ticketData = await db.collection("tickets").get();
+      setTickets1(ticketData.docs.map(doc => doc.data()));
+    };
+    fetchData();
+  });
 
-          
+  const categories = ['open', 'In progress', 'closed'];
+
+  const countTicketsByCategory = () => {
+    const ticketCounts = { 'open': 0, 'In progress': 0, 'closed': 0 };
+    tickets1.forEach(ticket => {
+      ticketCounts[ticket.status] += 1;
+    });
+    return categories.map(category => ({ category, count: ticketCounts[category] }));
+  };
+
+  const data1 = countTicketsByCategory();
 
 
-  //         timeClosed : doc.data().closing_timestamp,
-  //         timeTaken : doc.data().timeClosed - doc.data().timeOpen,
-  //         agent : doc.data().agent,
-      
-  //     })));
-  //   })
-    
-  //     console.log(tickets)
-  // },[])
+
+
+
 
   useEffect  (() => {
 
@@ -293,13 +290,13 @@ useEffect(() => {
   }, [input]);
 
   return (
-    <div className="client_tickets">
-      <div className="client_tickets_header">
-        <Link to="/adminagent" className="backheader_link">
-          <ArrowCircleLeftOutlinedIcon className="back_button" />
+    <div className="client_ticketsa">
+      <div className="client_tickets_headera">
+        <Link to="/adminagent" className="backheader_linka">
+          <ArrowCircleLeftOutlinedIcon className="back_buttona" />
         </Link>
 
-        <div className="clients_tickets_display">
+        <div className="clients_tickets_displaya">
           <select
             className="select"
             value={input}
@@ -310,84 +307,97 @@ useEffect(() => {
               <option value={agent.email}>{agent.email}</option>
             ))}
           </select>
+        
+          <div className="agent_status">
           <h1>{agentState}</h1>
-          <span>{agentState}</span>
           <Button onClick={handleAgentStatus}>Change status</Button>
-          <div className="ticket_report">
-            <div className="total_tickets">
-              <span className="total_ticket_span">
+          </div>
+<>  </>
+<>  </>
+<>  </>
+          <div className="ticket_reporta">
+   
+            <div className="open_tickets">
+              <span className="total_ticket_spana">
                 <h2>Total Tickets</h2>
               </span>
-              <span className="total_ticket_span1">
+              <span className="total_ticket_span1a">
                 <h1> {totalTickets}</h1>
               </span>
             </div>
 
             <div className="open_tickets">
-              <span className="total_ticket_span">
+              <span className="total_ticket_spana">
                 <h2>Open Tickets</h2>
               </span>
-              <span className="total_ticket_span1">
+              <span className="total_ticket_span1a">
                 <h1> {openTickets}</h1>
               </span>
             </div>
 
             <div className="closed_tickets">
-              <span className="total_ticket_span">
+              <span className="total_ticket_spana">
                 <h2>Closed Tickets</h2>
               </span>
-              <span className="total_ticket_span1">
+              <span className="total_ticket_span1a">
                 <h1> {closedTickets}</h1>
               </span>
             </div>
           </div>
-          <div className="rating_report">
-            <span className="tickets_ratings">
-              <span className="total_ticket_span1">
+          <div className="rating_reporta">
+            <span className="tickets_ratingsa">
+              <span className="total_ticket_span1a">
                 <h2>Ratings</h2>
               </span>
             </span>
 
-            <span className="total_ratings">
-              <span className="total_ticket_span">
+            <span className="total_ratingsa">
+              <span className="total_ticket_spana">
                 <h2>modal rating 🧮 </h2>
               </span>
-              <span className="total_ticket_span1">
+              <span className="total_ticket_span1a">
                 <h1> {modalRating}</h1>
               </span>
             </span>
 
-            <span className="good_rating">
-              <span className="total_ticket_span">
+            <span className="good_ratinga">
+              <span className="total_ticket_spana">
                 <h2>Satisfied 🙂 </h2>
               </span>
-              <span className="total_ticket_span1">
+              <span className="total_ticket_span1a">
                 <h1>{satisfied}</h1>
               </span>
             </span>
 
-            <span className="average_rating">
-              <span className="total_ticket_span">
+            <span className="average_ratinga">
+              <span className="total_ticket_spana">
                 <h2>Moderatly Satisfied 🙁 </h2>
               </span>
-              <span className="total_ticket_span1">
+              <span className="total_ticket_span1a">
                 <h1> {modsatisfied}</h1>
               </span>
             </span>
-            <span className="poor_rating">
-              <span className="total_ticket_span">
+            <span className="poor_ratinga">
+              <span className="total_ticket_spana">
                 <h2>Disatisfied 😠 </h2>
               </span>
-              <span className="total_ticket_span1">
+              <span className="total_ticket_span1a">
                 <h1> {unsatisfied}</h1>
               </span>
             </span>
           </div>
         </div>
       </div>
-
+        
+      <BarChart width={800} height={400} data={data1} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+  <CartesianGrid strokeDasharray="3 3" />
+  <XAxis dataKey="category" />
+  <YAxis />
+  <Tooltip />
+  <Legend />
+  <Bar dataKey="count" fill="#8884d8" />
+</BarChart>
       <table>
-        // populate table with values from ticket array 
         count : <h3>{tickets.length}</h3>
         <tr>
           <th>DATE</th>
@@ -408,7 +418,29 @@ useEffect(() => {
             <td>{ticket.timeClosed}</td> 
             <td>{ticket.timeTaken}</td>
             <td>{ticket.agent}</td>
-            <td>{ticket.rate}</td>
+            {ticket.rate === "satisfied" ? (
+              <td>
+             
+                  <h1>🙂</h1>
+              
+                  </td>
+                  ) : ticket.rate === "poor" ? (
+                    <td>
+                      
+                        <h1>😠</h1>
+                        
+                        </td>
+                        ): ticket.rate === "modsatisfied" ? (
+                          <td>
+
+                              <h1>🙁</h1>
+
+                              </td>
+                              )
+                              : ( <td> ? </td> ) 
+                              }
+
+        
           </tr>
         ))}
 
@@ -416,6 +448,7 @@ useEffect(() => {
     
 
     </table>
+
 
     </div>
   );

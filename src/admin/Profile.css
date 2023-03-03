@@ -1,98 +1,102 @@
-.profilepage{
-display: flex;
-flex-direction: column;
-background-color: #183247;
-height: 100vh;
-}
-.back_button{
-margin-left: -1200px;
-
-}
-.profilecard{
-border-bottom: 1px solid rgb(106, 105, 104)!important;;
-border-top: 1px solid rgb(106, 105, 104)!important;;
-border-right: 1px solid rgb(106, 105, 104)!important;
-border-left: 1px solid rgb(106, 105, 104)!important; 
-border-radius: 1px!important;
-align-items: center;
-height: 400px;
-margin-bottom: 10px;
-margin-right: 60%;
-margin-left: 35%;
-width: 500px ;
-background-color:rgb(214, 214, 214);
-
-
-
-}
-.card_details
-{
-    justify-content: space-evenly;
-    align-items: center;
- border-bottom: 1px solid rgb(106, 105, 104)!important;;
-border-top: 1px solid rgb(106, 105, 104)!important;;
-border-right: 1px solid rgb(106, 105, 104)!important;
-border-left: 1px solid rgb(106, 105, 104)!important; 
-height: 300px;
-margin-bottom: 10px;
-margin-right: 90%;
-margin-left: 20%;
-border-radius: 2px!important;
-width: 300px ;
-}   
-
-.card_mdetails{
-    margin-left: 20px;
+/* Define root variables */
+:root {
+    --primary-color: #3f51b5;
+    --secondary-color: #ffffff;
+  }
+  
+  /* Import Google Font */
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+  
+  /* Profile Card Styles */
+  
+  .profilecard {
+    width: 300px;
+    padding: 20px;
+    margin: 20px auto;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    background-color: var(--secondary-color);
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  .profilecard h2 {
+    margin-top: 0;
+    color: var(--primary-color);
+  }
+  
+  .card_details {
+    margin-top: 20px;
     display: flex;
-    align-items: flex-start ;
-}
-
-
-.updatedetails{
-background-color:rgb(214, 214, 214);
-display: flex;
-flex-direction: column;  
-border-bottom: 1px solid rgb(106, 105, 104)!important;;
-border-top: 1px solid rgb(106, 105, 104)!important;;
-border-right: 1px solid rgb(106, 105, 104)!important;
-border-left: 1px solid rgb(106, 105, 104)!important; 
-border-radius: 1px!important;
-height: 400px;
-margin-bottom: 10px;
-margin-right: 60%;
-margin-left: 35%;
-width: 500px ;
-}
-.update_form{
-display: flex;
-align-items: center;
-justify-content: space-evenly;
-
-}
-.update_form>input{
-    height: 30px;
+    flex-direction: column;
+  }
+  
+  .card_mdetails {
+    margin-top: 10px;
+  }
+  
+  .card_mdetails h3 {
+    font-size: 16px;
+  }
+  
+  .profilepage {
+    max-width: 800px;
+    margin: 20px auto;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  .profilepage a {
+    text-decoration: none;
+    color: var(--primary-color);
+  }
+  
+  .back_button {
+    font-size: 30px;
+    margin-right: 10px;
+    color: var(--primary-color);
+  }
+  
+  .updatedetails {
+    margin-top: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .update_form {
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .update_form h5 {
+    font-size: 16px;
     margin-bottom: 10px;
-    background-color: white;
-    width: 50%;
-}
-.reset{
-    margin-left: 10px;
-    margin-right: 10px;
-    border-radius: 2px;
-    background-color: #abcdef;   
-    border-bottom: 1px solid rgb(106, 105, 104)!important;;
-    border-top: 1px solid rgb(106, 105, 104)!important;;
-    border-right: 1px solid rgb(106, 105, 104)!important;
-    border-left: 1px solid rgb(106, 105, 104)!important; 
-}
-.updatebtn{
-    margin-left: 10px;
-    margin-right: 10px;
-    border-radius: 2px;
-    background-color: rgb(0, 255, 153);
-    border-bottom: 1px solid rgb(106, 105, 104)!important;;
-    border-top: 1px solid rgb(106, 105, 104)!important;;
-    border-right: 1px solid rgb(106, 105, 104)!important;
-    border-left: 1px solid rgb(106, 105, 104)!important; 
-
-}
+  }
+  
+  .update_form input {
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    margin-bottom: 10px;
+    font-size: 14px;
+    width: 200px;
+  }
+  
+  .updatebtn {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .updatebtn:hover {
+    background-color: #1a237e;
+  }
+  

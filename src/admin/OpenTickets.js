@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "../customers/ClientTickets.css";
 import ArrowCircleLeftOutlinedIcon from "@mui/icons-material/ArrowCircleLeftOutlined";
 import { db } from "../database/firebase";
-import Ticket_infoa from "../customers/Ticket_infoa";
+import Ticket_info from "../customers/Ticket_info";
 import { useStateValue } from "../Redux/StateProvider";
 //import { query, collection, onSnapshot } from "firebase/firestore";
 
@@ -50,7 +50,7 @@ function ClientTickets() {
 
         <div className="clients_tickets_display">
           {tickets.map((ticket) => (
-            <Ticket_infoa
+            <Ticket_info
               key={ticket.id}
               // open={ticket.data.open}
               id={ticket.id}

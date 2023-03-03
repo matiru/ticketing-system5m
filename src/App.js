@@ -79,7 +79,7 @@ function App() {
           <Route path="/customer/mytickets" element={<ClientTickets />}></Route>
           <Route path="/customer/myprogressedtickets" element={<TicketsInProgress/>}></Route>
      
-          <Route path="/customer/opentickets" element={<OpenTickets />}></Route>
+          <Route path="/customer/closedtickets" element={<OpenTickets />}></Route>
           <Route
             path="/agentdashboard/closedtickets"
             element={<ClosedTickets />}

@@ -1,0 +1,161 @@
+/* Define root variables */
+:root {
+  --primary-color: #3f51b5;
+  --secondary-color: #ffffff;
+}
+
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+/* Body styles */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Montserrat', sans-serif;
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+}
+
+/* Header styles */
+.backheader_linka {
+  text-decoration: none;
+}
+
+.back_buttona {
+  font-size: 2rem;
+  color: var(--primary-color);
+  cursor: pointer;
+}
+
+.clients_tickets_displaya {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.select {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  border: none;
+  outline: none;
+  margin-right: 1rem;
+  height: 2rem;
+}
+
+h1 {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.ticket_reporta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+.total_ticketsa,
+.open_tickets,
+.closed_tickets {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 2rem;
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  padding: 2rem;
+  border-radius: 0.5rem;
+  text-align: center;
+}
+
+.total_ticket_spana,
+.total_ticket_span1a {
+  margin: 0;
+}
+
+.total_ticket_spana h2,
+.total_ticket_span1a h1 {
+  margin: 0;
+}
+
+.rating_reporta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+.tickets_ratingsa {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-right: 2rem;
+}
+
+.good_ratinga,
+.average_ratinga,
+.poor_ratinga {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 2rem;
+  text-align: center;
+}
+
+.total_ratingsa,
+.total_ticket_spana {
+  margin: 0;
+}
+
+.total_ratingsa h2,
+.total_ticket_spana h2,
+.total_ticket_span1a h1 {
+  margin: 0;
+}
+
+/* Table styles */
+table {
+  width: 100%;
+  margin-top: 2rem;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  border: 1px solid var(--primary-color);
+  padding: 0.5rem;
+  text-align: center;
+}
+
+th {
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tr:hover {
+  background-color: #ddd;
+}
+.agent_status{
+  display: flex;
+  gap: 1rem;
+
+}
+.agent_status>button{
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: none;
+  outline: none;
+  background-color:lightgreen;
+  cursor: pointer;
+}

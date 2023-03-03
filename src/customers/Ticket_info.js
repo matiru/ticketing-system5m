@@ -1,16 +1,11 @@
 import React, { useState, useEffect } from "react";
-import "./ClientTickets.css";
-import "./RaiseTicket.css";
-import InsertEmoticonIcon from "@mui/icons-material/InsertEmoticon";
-import MicIcon from "@mui/icons-material/Mic";
-import "./Chat.css";
+import "./Ticket_info.css";
 import firebase from "firebase/compat/app";
 import { useStateValue } from "../Redux/StateProvider";
-import { useParams } from "react-router-dom";
-import "./ClientTickets.css";
 import { db } from "../database/firebase";
 import { Modal } from "@mui/material";
 import { serverTimestamp } from "firebase/firestore";
+import"./Chat.css";
 function Ticket_info({ subject, agent, status, id, description, rate }) {
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
@@ -42,55 +37,63 @@ function Ticket_info({ subject, agent, status, id, description, rate }) {
           console.log("status updated");
         });
     };
-
-  // const closeTicket = (e) => {
-  //   e.preventDefault();
-
-  //   db.collection("tickets")
-  //     .doc(id)
-  //     .update({
-  //       status: "closed",
-  //       closing_timestamp: serverTimestamp(),
-  //     })
-  //     .then(function () {
-  //       console.log("status updated");
-  //     });
-  // };
   const [isLoading, setIsLoading] = useState(false);
-
-const closeTicket = (e) => {
-  e.preventDefault();
+  const closeTicket = (e) => {
+    e.preventDefault();
+    
+    setIsLoading(true);
   
-  setIsLoading(true);
-
-  // Get the agent email from the ticket
-  const agentEmail = agent;
-
-  // Assign the next unassigned ticket to the agent
-  db.collection("tickets")
-    .where("assigned", "==", false)
-    .orderBy("queueNumber", "asc")
-    .limit(1)
-    .get()
-    .then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        const ticketId = doc.id;
-        doc.ref.update({
-          agent: agentEmail
-        }).then(() => {
-          console.log(`Ticket ${ticketId} assigned to agent ${agentEmail}`);
-
-          // Update the ticket status and closing timestamp
-          db.collection("tickets")
-            .doc(id)
-            .update({
-              status: "closed",
-              closing_timestamp: serverTimestamp(),
-            })
-            .then(function () {
-              console.log("ticket status updated");
-
+    // Get the agent email from the ticket
+    const agentEmail = agent;
+  
+    // Check if there are unassigned tickets
+    db.collection("tickets")
+      .where("assigned", "==", false)
+      .limit(1)
+      .get()
+      .then((querySnapshot) => {
+        if (!querySnapshot.empty) {
+          // Assign the next unassigned ticket to the agent
+          querySnapshot.forEach((doc) => {
+            const ticketId = doc.id;
+            doc.ref.update({
+              agent: agentEmail,
+              assigned: true,
+            }).then(() => {
+              console.log(`Ticket ${ticketId} assigned to agent ${agentEmail}`);
+  
               // Update the agent's isActive field
+              db.collection("agents")
+                .where("email", "==", agentEmail)
+                .get()
+                .then((querySnapshot) => {
+                  querySnapshot.forEach((doc) => {
+                    doc.ref.update({
+                      isActive: false
+                    }).then(function () {
+                      console.log("agent isActive updated");
+                    });
+                  });
+                })
+                .catch((error) => {
+                  console.log("Error updating agent isActive: ", error);
+                });
+            });
+          });
+        }
+  
+        // Update the ticket status and closing timestamp
+        db.collection("tickets")
+          .doc(id)
+          .update({
+            status: "closed",
+            closing_timestamp: serverTimestamp(),
+          })
+          .then(function () {
+            console.log("ticket status updated");
+  
+            // Update the agent's isActive field if no unassigned tickets
+            if (querySnapshot.empty) {
               db.collection("agents")
                 .where("email", "==", agentEmail)
                 .get()
@@ -100,27 +103,27 @@ const closeTicket = (e) => {
                       isActive: true
                     }).then(function () {
                       console.log("agent isActive updated");
-                      setIsLoading(false);
                     });
                   });
                 })
                 .catch((error) => {
                   console.log("Error updating agent isActive: ", error);
-                  setIsLoading(false);
                 });
-            })
-            .catch((error) => {
-              console.log("Error updating ticket status: ", error);
-              setIsLoading(false);
-            });
-        });
+            }
+  
+            setIsLoading(false);
+          })
+          .catch((error) => {
+            console.log("Error updating ticket status: ", error);
+            setIsLoading(false);
+          });
+      })
+      .catch((error) => {
+        console.log("Error checking for unassigned tickets: ", error);
+        setIsLoading(false);
       });
-    })
-    .catch((error) => {
-      console.log("Error assigning ticket to agent: ", error);
-      setIsLoading(false);
-    });
-};
+  };
+  
 
   const sendMessage = (e) => {
     e.preventDefault();

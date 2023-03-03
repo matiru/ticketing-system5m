@@ -23,7 +23,6 @@ function AdminAgent() {
   useEffect(() => {
     db.collection("tickets")
        .where("status", "==", "open")
-      // . orderBy("timestamp", 'asc')
       .onSnapshot((snapshot) => {
         tickets.sort((a, b) => {
           return a.data.timestamp.seconds - b.data.timestamp.seconds;
@@ -43,47 +42,38 @@ function AdminAgent() {
       <div className="agentdashboard_sidebar">
         <div className="agentdashboard_sidebar_header">
           <Avatar src="https://avatars.dicebear.com/api/human/:matiru5810.svg" />
-          <h3>{}</h3>
+          <h3>{user.email}</h3>
         </div>
-        <div className="agentdashboard_sidebar_nav">
+        <div className="sidebar">
+          <div className="button_container">
+            <Link to="profile" className="header_link">
+              <span className="span_tickets">
+                <h2>My Profile</h2>
+              </span>
+            </Link>
+          </div>
           <div className="button_container">
             <Link to="progressedtickets" className="header_link">
               <span className="span_tickets">
-                <h2>Tickets In Progress</h2>
+              <h2>My Open Tickets</h2>
               </span>
             </Link>
           </div>
           <div className="button_container">
-            <Link to="closedtickets" className="header_link">
+            <Link to="closedtickets"className="header_link">
               <span className="span_tickets">
-                <h2>Closed Tickets</h2>
+              <h2>Closed Tickets</h2>
               </span>
             </Link>
           </div>
-
           <div className="button_container">
             <Link to="agentsreport" className="header_link">
               <span className="span_tickets">
-                <h2> Agents Report</h2>
+              <h2>Report</h2>
               </span>
             </Link>
           </div>
-          <div className="button_container">
-            <Link to="agents" className="header_link">
-              <span className="span_tickets">
-                <h2>Create New Agent</h2>
-              </span>
-            </Link>
           </div>
-
-          {/* <div className="button_container">
-            <Link to="profile" className="header_link">
-              <span className="span_tickets">
-                <h2>My profile</h2>
-              </span>
-            </Link>
-          </div> */}
-        </div>
       </div>
       <div className="agentdashboard_tickets">
         <div className="agentdashboard_tickets_header">

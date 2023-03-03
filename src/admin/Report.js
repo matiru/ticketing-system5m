@@ -95,7 +95,7 @@ function Report() {
       </div>
 
       <div className="ticket_report">
-        <div className="total_tickets">
+        <div className="open_tickets">
           <span className="total_ticket_span">
             <h2>Total Tickets</h2>
           </span>
@@ -124,46 +124,46 @@ function Report() {
       </div>
 
       <div className="rating_report">
-        <span className="tickets_ratings">
-          <span className="total_ticket_span1">
-            <h2>Ratings</h2>
-          </span>
-        </span>
+       
 
-        <span className="total_ratings">
+            <h2>Ratings</h2>
+          
+       
+
+        <div className="open_tickets">
           <span className="total_ticket_span">
             <h2>modal rating 🧮 </h2>
           </span>
           <span className="total_ticket_span1">
             <h1> {} </h1>
           </span>
-        </span>
+        </div>
 
-        <span className="good_rating">
-          <span className="total_ticket_span">
+        <div className="open_tickets">
+        <span className="total_ticket_span">
             <h2>Satisfied 🙂 </h2>
           </span>
           <span className="total_ticket_span1">
             <h1> {satisfied}</h1>
           </span>
-        </span>
+        </div>
 
-        <span className="average_rating">
+        <div className="open_tickets">
           <span className="total_ticket_span">
             <h2>Moderatly Satisfied 🙁 </h2>
           </span>
           <span className="total_ticket_span1">
             <h1> {modsatisfied}</h1>
           </span>
-        </span>
-        <span className="poor_rating">
+          </div>
+        <div className="open_tickets">
           <span className="total_ticket_span">
             <h2>Disatisfied 😠 </h2>
           </span>
           <span className="total_ticket_span1">
             <h1> {unsatisfied}</h1>
           </span>
-        </span>
+      </div>
       </div>
     </div>
   );

@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
-import "./ClientTickets.css";
-import "./RaiseTicket.css";
 import InsertEmoticonIcon from "@mui/icons-material/InsertEmoticon";
 import MicIcon from "@mui/icons-material/Mic";
-import "./Chat.css";
 import firebase from "firebase/compat/app";
 import { useStateValue } from "../Redux/StateProvider";
 import { db } from "../database/firebase";
 import { useParams } from "react-router-dom";
 import { Modal } from "@mui/material";
+import { serverTimestamp } from "firebase/firestore";
 
 function Ticket_infoa1({
   subject,
@@ -45,9 +43,16 @@ function Ticket_infoa1({
       email: user.email,
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
     });
-
     setInput("");
+
+    db.collection("tickets").doc(id).update({
+      status: "In progress",
+      solving_start_time:serverTimestamp(),
+    });
+
   };
+
+  
 
   const handleClose = (e) => {
     e.stopPropagation();
@@ -131,7 +136,7 @@ function Ticket_infoa1({
 
           <h3>subject:{subject}</h3>
           <h3>status:{status}</h3>
-          {/* <h3>client:{customer}</h3> */}
+          <h3>client:{customer}</h3>
           <h3>agent:{agent}</h3>
         </div>
       ) : (

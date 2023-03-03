@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import "./ClientTickets.css";
 import ArrowCircleLeftOutlinedIcon from "@mui/icons-material/ArrowCircleLeftOutlined";
 import { db } from "../database/firebase";
-import Ticket_info from "./Ticket_info";
+import Ticket_infoa3 from "./Tickets_infoa3";
 import { useStateValue } from "../Redux/StateProvider";
 //import { query, collection, onSnapshot } from "firebase/firestore";
 
@@ -48,7 +47,7 @@ function TicketsInProgress() {
 
         <div className="clients_tickets_display">
           {tickets.map((ticket) => (
-            <Ticket_info
+            <Ticket_infoa3
               key={ticket.id}
               // open={ticket.data.open}
               id={ticket.id}
