@@ -33,6 +33,10 @@ function ClientTickets() {
       });
   }, []);
 
+  tickets.sort((a, b) => {
+    return a.data.timestamp.seconds - b.data.timestamp.seconds;
+  });
+
   return (
     <div className="client_tickets">
       <div className="client_tickets_header">

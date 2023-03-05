@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import "./RaiseTicket.css";
 import { Link } from "react-router-dom";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
@@ -29,6 +29,93 @@ const [loading, setLoading] = useState(false);
     setInput("");
     setInput1("");
   };
+  const [tickets1, setTickets1] = useState([]);
+  const [isCountAccessed, setIsCountAccessed] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const ticketData = await db.collection("tickets")
+        .where("customer", "==", user.email)
+        .get();
+      setTickets1(ticketData.docs.map((doc) => doc.data()));
+    };
+    fetchData();
+  }, [user.email]);
+
+  const countTicketsByCategory = () => {
+    const ticketCounts = { open: 0, "In progress": 0, closed: 0 };
+    tickets1.forEach((ticket) => {
+      ticketCounts[ticket.status] += 1;
+    });
+    return Object.entries(ticketCounts).map(([category, count]) => ({
+      category,
+      count,
+    }));
+  };
+
+  const ticketCounts = countTicketsByCategory();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   const createTicket = async (subject, description, customerEmail) => {
@@ -69,10 +156,9 @@ const [loading, setLoading] = useState(false);
       } else {
         // No active agents found, add a queue number property to the ticket
         const ticketCount = await getCountFromServer(query(ticketsRef));
-        const queueNumber = ticketCount.data().count + 1;
   
         const newTicketRef = await addDoc(ticketsRef, {
-          id: queueNumber,
+          id: ticketCount.data().count + 1,
           subject,
           description,
           time: serverTimestamp(),
@@ -82,7 +168,6 @@ const [loading, setLoading] = useState(false);
           closing_timestamp: serverTimestamp(),
           date: new Date().toLocaleDateString(),
           assigned: false,
-          queueNumber
         });
   
         window.alert("Sorry, no agents are currently available. Your ticket has been added to the queue.");
@@ -124,36 +209,68 @@ const [loading, setLoading] = useState(false);
         </span>
       </div>
       <div className=" raiseticket_footer">
-        <div className="sidebar">
-          <div className="button_container">
-            <Link to="profile" className="header_link">
-              <span className="span_tickets">
-                <h2>My Profile</h2>
-              </span>
-            </Link>
-          </div>
-          <div className="button_container">
-            <Link to="mytickets" className="header_link">
-              <span className="span_tickets">
-              <h2>My Open Tickets</h2>
-              </span>
-            </Link>
-          </div>
-          <div className="button_container">
-            <Link to="myprogressedtickets"className="header_link">
-              <span className="span_tickets">
-              <h2>Tickets In Progess</h2>
-              </span>
-            </Link>
-          </div>
-          <div className="button_container">
-            <Link to="closedtickets" className="header_link">
-              <span className="span_tickets">
-              <h2>My Closed Tickets</h2>
-              </span>
-            </Link>
-          </div>
-        </div>
+      <div className="sidebar">
+      <div className="button_container">
+        <Link to="profile" className="header_link">
+          <span className="span_tickets">
+            <h2>My Profile</h2>
+          </span>
+        </Link>
+      </div>
+      <div className="button_container">
+        <Link to="mytickets" className="header_link">
+          <span
+            className="span_tickets"
+            style={{
+              backgroundColor:
+                ticketCounts.find((t) => t.category === "open").count > 0
+                  ? "red"
+                  : "inherit",
+              animation:
+                !isCountAccessed && ticketCounts.find((t) => t.category === "open").count > 0
+                  ? "blinking 1000ms infinite"
+                  : "none",
+            }}
+            onClick={() => setIsCountAccessed(true)}
+          >
+            <h2>My Open Tickets</h2>
+            <span>{ticketCounts.find((t) => t.category === "open").count}</span>
+          </span>
+        </Link>
+      </div>
+      <div className="button_container">
+        <Link to="myprogressedtickets" className="header_link">
+          <span
+            className="span_tickets"
+            style={{
+              backgroundColor:
+                ticketCounts.find((t) => t.category === "In progress").count > 0
+                  ? "orange"
+                  : "inherit",
+            }}
+          >
+            <h2>Tickets In Progress</h2>
+            <span>{ticketCounts.find((t) => t.category === "In progress").count}</span>
+          </span>
+        </Link>
+      </div>
+      <div className="button_container">
+        <Link to="closedtickets" className="header_link">
+          <span
+            className="span_tickets"
+            style={{
+              backgroundColor:
+                ticketCounts.find((t) => t.category === "closed").count > 0
+                  ? "green"
+                  : "inherit",
+            }}
+          >
+            <h2>My Closed Tickets</h2>
+            <span>{ticketCounts.find((t) => t.category === "closed").count}</span>
+          </span>
+        </Link>
+      </div>
+    </div>
 
         <div className="createticket">
           <div className="ticketcontent">

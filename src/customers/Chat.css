@@ -49,10 +49,8 @@
   }
   
   .chat_body {
-    flex: 1;
     background-color: #e5ded8;
     background-position: center;
-    position: sticky;
     margin-left: 7%;
     padding: 30px;
     height: 200px;
@@ -67,6 +65,7 @@
     border-radius: 10px;
     padding: 10px;
     background-color: white;
+    margin-bottom: 30px;
     width: fit-content;
   }
   
@@ -115,13 +114,13 @@
   
   .signup-modal {
     display: flex;
+    height: 100vh;
     align-items: center;
     justify-content: center;
     padding-top: 75px;
     width: 100%;
     overflow: scroll;
     margin-bottom: 30px;
-    height: 100vh !important;
     flex-direction: column;
   }
   

@@ -20,6 +20,7 @@ function ClientTickets() {
       // . orderBy("timestamp", "desc")
        
       .onSnapshot((snapshot) => {
+        
         console.log(snapshot.docs.map((doc) => doc.data().ticket));
         setTickets(
           snapshot.docs.map((doc) => ({
@@ -30,6 +31,10 @@ function ClientTickets() {
         );
       })
   } , [user]) ;
+
+  tickets.sort((a, b) => {
+    return a.data.timestamp.seconds - b.data.timestamp.seconds;
+  });
 
   return (
     <div className="client_tickets">

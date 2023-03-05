@@ -63,7 +63,7 @@ function SuperAgent() {
           <div className="button_container">
             <Link to="progressedtickets" className="header_link">
               <span className="span_tickets">
-              <h2>My Open Tickets</h2>
+              <h2>Tickets In Progress</h2>
               </span>
             </Link>
           </div>

@@ -100,37 +100,43 @@ function AllAgentReport() {
 });
 
 
-  useEffect(() => {
-    db.collection("agents").onSnapshot((snapshot) => {
-      console.log(snapshot.docs.map((doc) => doc.data().email));
-      setAgents(
-        snapshot.docs.map((doc) => ({
-          id: doc.id,
-          data: doc.data(),
-          email: doc.data().email,
-        }))
-      );
+useEffect(() => {
+  db.collection("agents").onSnapshot((snapshot) => {
+    console.log(snapshot.docs.map((doc) => doc.data().email));
+    setAgents(
+      snapshot.docs.map((doc) => ({
+        id: doc.id,
+        data: doc.data(),
+        email: doc.data().email,
+      }))
+    );
 
-      // get email from selected setAgents and get count of open,closed and total tickets for each agent
-      agents.map((agent) => {
-        console.log(agent.email);
+    // get email from selected setAgents and get count of open,closed and total tickets for each agent
+    agents.forEach((agent) => {
+      console.log(agent.email);
 
-        db.collection("tickets")
-          .where("email", "==", agent.email)
-          .onSnapshot((snapshot) => {
-            console.log(snapshot.docs.map((doc) => doc.data().email));
-            setAgents(
-              snapshot.docs.map((doc) => ({
-                uid: user.uid,
-                id: doc.id,
-                data: doc.data(),
-                email: doc.data().email,
-              }))
-            );
-          });
-      });
+      db.collection("tickets")
+        .where("email", "==", agent.email)
+        .onSnapshot((snapshot) => {
+          console.log(snapshot.docs.map((doc) => doc.data().email));
+          setAgents((prevAgents) =>
+            prevAgents.map((prevAgent) =>
+              prevAgent.email === agent.email
+                ? {
+                    uid: user.uid,
+                    id: prevAgent.id,
+                    data: prevAgent.data,
+                    email: prevAgent.email,
+                    tickets: snapshot.docs.map((doc) => doc.data()),
+                  }
+                : prevAgent
+            )
+          );
+        });
     });
-  }, []);
+  });
+}, []);
+
 
   const [openTickets, setOpenTickets] = useState(0);
   const [closedTickets, setClosedTickets] = useState(0);
@@ -191,44 +197,17 @@ const handleAgentStatus = (e) => {
 // use effect triggered after handleAgentStatus is called and agentState is updated
 // reassign open tickets to other agents if agent is inactive
 
-useEffect(() => {
+useEffect (() => {
   
   if(agentState === "Inactive"){
     db.collection("tickets").where("agent","==",input).get().then((snapshot) => {
       snapshot.docs.map((doc) => {
         db.collection("tickets").doc(doc.id).update({
-          agent : ""
+          agent : "",
+          assigned : false
         })
       })
     })
-
-   // get all agents emails where isActive is true and store in array
-
-    db.collection("agents").where("isActive","==",true).get().then((snapshot) =>  
-    {
-      const emails = snapshot.docs.map((doc) => doc.data().email);
-      console.log(emails);
-      // get all open tickets where agent is empty and store in array
-      db.collection("tickets").where("agent","==","").get().then((snapshot) => {
-        const tickets = snapshot.docs.map((doc) => doc.id);
-        console.log(tickets);
-   
-        // assign open tickets to agents in round robin fashion
-        for(let i = 0; i < tickets.length; i++){
-          db.collection("tickets").doc(tickets[i]).update({
-            agent : emails[i % emails.length]
-          })
-        }
-      })
-    })
-
-
-
-
-
-
-
-
 
   }
 },[agentState])
@@ -297,6 +276,7 @@ useEffect(() => {
         </Link>
 
         <div className="clients_tickets_displaya">
+          <label>select Agent</label>
           <select
             className="select"
             value={input}

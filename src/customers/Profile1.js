@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 import Profile_info1 from "./Profile_info1";
 import { useStateValue } from "../Redux/StateProvider";
 import firebase from "firebase/compat/app";
-import {where } from 'firebase/firestore';
 
 
 function Profile1({id}) {

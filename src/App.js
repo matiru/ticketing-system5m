@@ -13,16 +13,17 @@ import ClosedTickets2 from "../src/admin/ClosedTickets2";
 import AllAgentReport from "../src/admin/AllAgentReport";
 import Report from "../src/admin/Report";
 import AdminAgent from "../src/admin/AdminAgent";
-import AgentLogin from "./AgentLogin";
+import AgentLogin from "../src/login_and_signup/AgentLogin";
 import db, { auth } from "../src/database/firebase";
 import SignUp from "./SignUp";
 import SuperAgent from "../src/admin/SuperAgent";
 import AddAgent from "../src/admin/AddAgent";
 import { useStateValue } from "../src/Redux/StateProvider";
-import LandingPage from "./LandingPage";
-import AdminLogin from "./AdminLogin";
+import  LandingPage from "../src/login_and_signup/LandingPage";
+import AdminLogin from "../src/login_and_signup/AdminLogin";
 import TicketsInProgress from "../src/customers/TicketsInProgress";
 import AdminProgressedTickets from "../src/admin/Adminpro";
+import "./admin/Profile.css";
 
 function App() {
   const [{ user }, dispatch] = useStateValue();
@@ -55,7 +56,7 @@ function App() {
           <Route path="/signup" element={<SignUp />}></Route>
           <Route path="/custo" element={<SignUp />}></Route>
           <Route path="/agentdashboard" element={<SuperAgent />}></Route>
-          <Route path="/" element={<LandingPage />}></Route>
+          <Route path="/" element={<LandingPage/>}></Route>
           <Route path="/adminagent" element={<AdminAgent />}></Route>
           <Route
             path="/adminagent/closedtickets"
@@ -75,7 +76,8 @@ function App() {
 
           <Route path="/agent" element={<AgentLogin />}></Route>
           <Route path="/admin" element={<AdminLogin />}></Route>
-          <Route path="/agentdashboard/agents" element={<AddAgent />}></Route>
+          <Route path="/adminagent/agents" element={<AddAgent />}></Route>
+
           <Route path="/customer/mytickets" element={<ClientTickets />}></Route>
           <Route path="/customer/myprogressedtickets" element={<TicketsInProgress/>}></Route>
      

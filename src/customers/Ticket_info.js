@@ -6,7 +6,7 @@ import { db } from "../database/firebase";
 import { Modal } from "@mui/material";
 import { serverTimestamp } from "firebase/firestore";
 import"./Chat.css";
-function Ticket_info({ subject, agent, status, id, description, rate }) {
+function Ticket_info({ subject, agent, status, id, description, rate ,customer }) {
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
   const [input1, setInput1] = useState("");
@@ -38,6 +38,8 @@ function Ticket_info({ subject, agent, status, id, description, rate }) {
         });
     };
   const [isLoading, setIsLoading] = useState(false);
+
+
   const closeTicket = (e) => {
     e.preventDefault();
     
@@ -123,6 +125,83 @@ function Ticket_info({ subject, agent, status, id, description, rate }) {
         setIsLoading(false);
       });
   };
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
 
   const sendMessage = (e) => {

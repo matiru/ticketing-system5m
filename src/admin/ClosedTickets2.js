@@ -14,8 +14,6 @@ function ClientTickets() {
   useEffect(() => {
     db.collection("tickets")
       .where("status", "==", "closed")
-      // .orderBy("timestamp", "desc")
-
       .onSnapshot((snapshot) => {
         tickets.sort((a, b) => {
           return a.data.timestamp.seconds - b.data.timestamp.seconds;
@@ -27,11 +25,13 @@ function ClientTickets() {
             id: doc.id,
             data: doc.data(),
           }))
-          //   .orderBy("timestamp", "desc")
+       
         );
       });
   }, []);
-
+  tickets.sort((a, b) => {
+    return a.data.timestamp.seconds - b.data.timestamp.seconds;
+  });
   return (
     <div className="client_tickets">
       <div className="client_tickets_header">

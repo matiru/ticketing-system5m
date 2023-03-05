@@ -1,18 +1,18 @@
 import React, { useState } from "react";
-import "./LandingPage.css";
+import "./adminlogin.css";
 import { Avatar } from "@mui/material";
 import { Link } from "react-router-dom";
-import db, { auth } from "../src/database/firebase";
+import  db, { auth } from "../database/firebase";
 import { useNavigate } from "react-router-dom";
-import { collection, getDocs, query, where, addDoc } from "firebase/firestore";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { collection, getDocs, query, where} from "firebase/firestore";
 import firebase from "firebase/compat/app";
 
-function AgentLogin() {
+function AdminLogin() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [username, setUsername] = useState("");
 
   const resetpass = (e) => {
     e.preventDefault();
@@ -38,13 +38,16 @@ function AgentLogin() {
     auth
       .signInWithEmailAndPassword(email, password)
       .then((auth) => {
-        const q = query(collection(db, "agents"), where("agent", "==", true));
+        const q = query(
+          collection(db, "superagents"),
+          where("superagent", "==", true)
+        );
 
         getDocs(q).then((querySnapshot) => {
           querySnapshot.forEach((doc) => {
             console.log(doc.id, " => ", doc.data());
             if (doc.data().email === email) {
-              navigate("/agentdashboard");
+              navigate("/adminagent");
             }
             //  else {
             //  window.alert("please register!");
@@ -57,29 +60,30 @@ function AgentLogin() {
   };
 
   return (
-    <div className="landingpage">
-      <div className="landingpage_header">
-        <div className="landingpage_header1">
-          <div className="landingpage_header11">
+    <div className="admin-landingpage">
+      <div className="n1">
+      <div className="admin-landingpage-header">
+        <div className="admin-landingpage_header1">
+          <div className="admin-landingpage_header11">
             <Avatar src="https://avatars.dicebear.com/api/human/:matiru5810.svg" />
             <h1>TickLy</h1>
           </div>
-          <Link to="/admin" className="linelinks">
-            <span className="linksignup">admin</span>
+          <Link to="/" className="admin-linelinks">
+            <span className="linksignup">homepage</span>
           </Link>
         </div>
-        <div className="landingpage_header2">
+        <div className="admin-landingpage-header2">
           <h3>Welcome To TickLy</h3>
         </div>
       </div>
-      <div className="landingpage_bodyframe_signup">
-        <div className="landingpage_body_signup">
-          <div className="landingpage_body1_signup">
-            <h1>Agent Sign-in</h1>
-            <form className="credentials">
+      <div className="admin-landingpage_bodyframe_signup">
+        <div className="admin-landingpage_body_signup">
+          <div className="admin-landingpage_body1_signup">
+            <h1>Administrator Sign-in</h1>
+            <form className="admin-credentials">
               <h5></h5>
               <input
-                className="input"
+                className="input-admin"
                 placeholder="Enter your email"
                 type="text"
                 value={email}
@@ -87,28 +91,30 @@ function AgentLogin() {
               />
               <h5></h5>
               <input
+                className="input-admin"
                 type="password"
                 placeholder="Enter your password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <Link className="linelinks">
+              <Link className="admin-linelinks">
                 <p className=" forgotpassword" onClick={resetpass}>
                   forgot password?
                 </p>
               </Link>
-              <div className="button_container1">
-                <button className="signInButton" type="submit" onClick={signIn}>
+              <div className="admin-button_container1">
+                <button className="admin-signInButton" type="submit" onClick={signIn}>
                   sign in
                 </button>
               </div>
             </form>
-            <div className="landingpage_body2"></div>
+            <div className="admin-landingpage_body2"></div>
           </div>
         </div>
       </div>
     </div>
+    </div>
   );
 }
 
-export default AgentLogin;
+export default AdminLogin;

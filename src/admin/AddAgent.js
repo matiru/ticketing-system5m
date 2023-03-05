@@ -28,15 +28,10 @@ function AddAgent() {
         authProvider: "local",
         role: "Agent",
         email,
-      });
-      window.alert("account successfully created");
+        isActive: true,
 
-      // .then((result) => {
-      //   dispatch({
-      //     type: actionTypes.SET_USER,
-      //     user: result.user,
-      //   });
-      // })
+      });
+      window.alert("account successfully created")
     } catch (err) {
       console.error(err);
       alert(err.message);

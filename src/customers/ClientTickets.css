@@ -54,6 +54,7 @@
   .clients_tickets_header_title {
     flex-grow: 1;
     text-align: center;
+    margin-top: 20px;
   }
   
   .clients_tickets_display {

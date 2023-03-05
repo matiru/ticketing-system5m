@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./LandingPage.css";
+import "./signup.css";
 import { Avatar } from "@mui/material";
 import { Link } from "react-router-dom";
 import db, { auth } from "../src/database/firebase";
@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { collection, getDocs, query, where, addDoc } from "firebase/firestore";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import firebase from "firebase/compat/app";
+import ArrowCircleLeftOutlinedIcon from "@mui/icons-material/ArrowCircleLeftOutlined";
 
 function SignUp() {
   const navigate = useNavigate();
@@ -91,68 +92,52 @@ function SignUp() {
   };
 
   return (
-    <div className="landingpage">
-      <div className="landingpage_header">
-        <div className="landingpage_header1">
-          <div className="landingpage_header11">
-            <Avatar src="https://avatars.dicebear.com/api/human/:matiru5810.svg" />
-            <h1>TickLy</h1>
-          </div>
-          <Link to="/" className="linelinks">
-            <span className="linksignup">Homepage</span>
-          </Link>
-        </div>
-        <div className="landingpage_header2">
-          <h3>Welcome To TickLy</h3>
-        </div>
-      </div>
-      <div className="landingpage_bodyframe_signup">
-        <div className="landingpage_body_signup">
-          <div className="landingpage_body1_signup">
-            <h1>Create a TickLy Account</h1>
-            <form className="credentials">
-              <h5></h5>
-              <input
-                className="input"
-                placeholder="Enter your email"
-                type="text"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <h5></h5>
-              <input
-                className="input"
-                placeholder="Enter your username"
-                type="text"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-              />
+    <div className="login">
+    <Link to="/" className="backheader_link">
+    <ArrowCircleLeftOutlinedIcon className="back_button" />
+      SIGN-IN
+     
+    </Link>
+    <img
+      className="login__logo"
+      src=" https://avatars.dicebear.com/api/human/:matiru5810.svg"
+    />
 
-              <h5></h5>
-              <input
-                type="password"
-                placeholder="Enter your password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              <div className="button_container1">
-                <button
-                  className="signInButton"
-                  type="submit"
-                  onClick={register}
-                >
-                  register
-                </button>
-                <button className="signInButton" type="submit" onClick={signIn}>
-                  sign in
-                </button>
-              </div>
-            </form>
-            <div className="landingpage_body2"></div>
-          </div>
-        </div>
-      </div>
+    <div className="login__container">
+      <h1>Create Account</h1>
+
+      <form>
+        <h5>E-mail</h5>
+        <input
+          type="text"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <h5>Username</h5>
+        <input
+          type="text"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <h5>Password</h5>
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+
+        <button
+          type="submit"
+          onClick={register}
+          className="login__signInButton"
+        >
+          Create Account
+        </button>
+      </form>
+
+      <p></p>
     </div>
+  </div>
   );
 }
 

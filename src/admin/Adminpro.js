@@ -37,7 +37,7 @@ function ClientTickets() {
         </Link>
         <div className="clients_tickets_header_title">
           {tickets?.length === 0 ? (
-            <h2>You have no closed tickets 😢</h2>
+            <h2> No Tickets In Progress 😢</h2>
           ) : (
             <h3>My Total Tickets: {tickets.length} </h3>
           )}

@@ -17,9 +17,7 @@ function ClientTickets() {
       .where("status", "==", "closed")
    
       .onSnapshot((snapshot) => {
-        tickets.sort((a, b) => {
-          return a.data.timestamp.seconds - b.data.timestamp.seconds;
-        });
+       
         console.log(snapshot.docs.map((doc) => doc.data().ticket));
         setTickets(
           snapshot.docs.map((doc) => ({
@@ -31,6 +29,9 @@ function ClientTickets() {
         );
       });
   }, []);
+  tickets.sort((a, b) => {
+    return a.data.timestamp.seconds - b.data.timestamp.seconds;
+  });
 
   return (
     <div className="client_tickets">

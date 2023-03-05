@@ -4,7 +4,6 @@ import ArrowCircleLeftOutlinedIcon from "@mui/icons-material/ArrowCircleLeftOutl
 import { db } from "../database/firebase";
 import Ticket_infoa3 from "./Tickets_infoa3";
 import { useStateValue } from "../Redux/StateProvider";
-//import { query, collection, onSnapshot } from "firebase/firestore";
 
 function TicketsInProgress() {
   const [tickets, setTickets] = useState([]);
@@ -14,7 +13,6 @@ function TicketsInProgress() {
     db.collection("tickets")
       .where("customer", "==", user.email)
       .where("status", "==", "In progress")
-      // order by timestamp
       .onSnapshot((snapshot) => {
         tickets.sort((a, b) => {
           return a.data.timestamp.seconds - b.data.timestamp.seconds;
@@ -38,9 +36,9 @@ function TicketsInProgress() {
         </Link>
         <div className="clients_tickets_header_title">
           {tickets?.length === 0 ? (
-            <h2>You have no open tickets 😢</h2>
+            <h4>Kindly wait for an agent to be available.Thank you for your patience</h4>
           ) : (
-            <h3>My Open Tickets: {tickets.length} </h3>
+            <h4>Tickets in progress: {tickets.length} </h4>
           )}
           {/* <h3>My tickets:</h3> */}
         </div>

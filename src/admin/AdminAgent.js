@@ -3,7 +3,6 @@ import { Avatar } from "@mui/material";
 import "./SuperAgent.css";
 import Ticket_infoa1 from "../customers/Ticket_infoa1";
 import { Link } from "react-router-dom";
-import ArrowCircleLeftOutlinedIcon from "@mui/icons-material/ArrowCircleLeftOutlined";
 import { useStateValue } from "../Redux/StateProvider";
 import { auth, db } from "../database/firebase";
 import { useNavigate } from "react-router-dom";
@@ -24,9 +23,7 @@ function AdminAgent() {
     db.collection("tickets")
        .where("status", "==", "open")
       .onSnapshot((snapshot) => {
-        tickets.sort((a, b) => {
-          return a.data.timestamp.seconds - b.data.timestamp.seconds;
-        });
+  
         console.log(snapshot.docs.map((doc) => doc.data().ticket));
         setTickets(
           snapshot.docs.map((doc) => ({
@@ -36,7 +33,9 @@ function AdminAgent() {
         );
       });
   }, []);
-
+  tickets.sort((a, b) => {
+    return a.data.timestamp.seconds - b.data.timestamp.seconds;
+  });
   return (
     <div className="agentdashboard">
       <div className="agentdashboard_sidebar">
@@ -55,7 +54,7 @@ function AdminAgent() {
           <div className="button_container">
             <Link to="progressedtickets" className="header_link">
               <span className="span_tickets">
-              <h2>My Open Tickets</h2>
+              <h2>Tickets In Progress</h2>
               </span>
             </Link>
           </div>
@@ -70,6 +69,13 @@ function AdminAgent() {
             <Link to="agentsreport" className="header_link">
               <span className="span_tickets">
               <h2>Report</h2>
+              </span>
+            </Link>
+          </div>
+          <div className="button_container">
+            <Link to="agents" className="header_link">
+              <span className="span_tickets">
+              <h2>Create Agent</h2>
               </span>
             </Link>
           </div>

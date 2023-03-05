@@ -10,13 +10,14 @@
   /* Profile Card Styles */
   
   .profilecard {
-    width: 300px;
+    width: 500px;
+    height: fit-content;
+    gap: 20px;
     padding: 20px;
     margin: 20px auto;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     background-color: var(--secondary-color);
-    text-align: center;
     font-family: 'Montserrat', sans-serif;
   }
   
@@ -58,17 +59,21 @@
   }
   
   .updatedetails {
-    margin-top: 30px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+ display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   }
-  
   .update_form {
-    margin: 10px;
-    display: flex;
+  display: flex;
+  align-items: center;
+justify-content: space-evenly;
     flex-direction: column;
-    align-items: center;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    background-color: var(--secondary-color);
+    text-align: center;
+    font-family: 'Montserrat', sans-serif
   }
   
   .update_form h5 {

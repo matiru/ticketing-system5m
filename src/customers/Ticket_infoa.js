@@ -54,8 +54,6 @@ function Ticket_infoa({ subject, customer,agent, status, description, id, rate }
           <h3>agent:{agent}</h3>
         </div>
       ) : (
-        //    <div onClick={() => setOpen(true)}>
-        // {status === "open" ? (
         <div className="ticket_info_closed">
           <Modal
             className="signup-modal"

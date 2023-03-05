@@ -28,6 +28,9 @@ function ClientTickets() {
         );
       });
   }, []);
+  tickets.sort((a, b) => {
+    return a.data.timestamp.seconds - b.data.timestamp.seconds;
+  });
 
   return (
     <div className="client_tickets">
@@ -37,7 +40,7 @@ function ClientTickets() {
         </Link>
         <div className="clients_tickets_header_title">
           {tickets?.length === 0 ? (
-            <h2>You have no closed tickets 😢</h2>
+            <h2>You have no  tickets in progress😢</h2>
           ) : (
             <h3>My Total Tickets: {tickets.length} </h3>
           )}

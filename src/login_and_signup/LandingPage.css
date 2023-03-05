@@ -1,0 +1,129 @@
+/* Define root variables */
+:root {
+  --primary-color: #3f51b5;
+  --secondary-color: #ffffff;
+}
+
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+/* General styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: var(--secondary-color);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 3rem auto;
+  max-width: 600px;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+}
+
+.logo img {
+  width: 100px;
+}
+
+.welcome-message {
+  text-align: center;
+  margin: 2rem 0;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+p {
+  font-size: 1.2rem;
+  color: #666;
+}
+
+.landingpage_body2 {
+  display: flex;
+  align-items: center;
+  margin: 2rem 0;
+}
+
+.areyou {
+  margin-left: 1rem;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.agentloginlink {
+  margin-left: 0.5rem;
+  font-size: 1.2rem;
+  color: var(--primary-color);
+  text-decoration: underline;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+label {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  color: #666;
+}
+
+input {
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+button {
+  margin-top: 1rem;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--primary-color);
+  color: #fff;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.signup-link {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  color: #666;
+  text-align: center;
+}
+
+.linksignup1 {
+  color: var(--primary-color);
+  text-decoration: underline;
+}
+
+.forgotpassword {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  color: var(--primary-color);
+  text-decoration: underline;
+  text-align: center;
+}
+
