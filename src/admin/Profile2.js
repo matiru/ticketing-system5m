@@ -15,14 +15,31 @@ function Profile() {
 
   const [{ user }, dispatch] = useStateValue();
 
+  // useEffect(() => {
+  //   db.collection("superagents")
+
+  //     .where("email", "==", user.email)
+  //     .onSnapshot((snapshot) => {
+  //       console.log(snapshot.docs.map((doc) => doc.data().agent));
+  //       setAgents(
+  //         snapshot.docs.map((doc) => ({
+  //           uid: user.uid,
+  //           id: doc.id,
+  //           data: doc.data(),
+  //         }))
+  //       );
+  //     });
+  // }, []);
+
+
+
   useEffect(() => {
     db.collection("superagents")
-
       .where("email", "==", user.email)
-      .onSnapshot((snapshot) => {
-        console.log(snapshot.docs.map((doc) => doc.data().agent));
+      .get()
+      .then((querySnapshot) => {
         setAgents(
-          snapshot.docs.map((doc) => ({
+          querySnapshot.docs.map((doc) => ({
             uid: user.uid,
             id: doc.id,
             data: doc.data(),
@@ -30,6 +47,18 @@ function Profile() {
         );
       });
   }, []);
+  
+
+
+
+
+
+
+
+
+
+
+
 
   const resetpass = (e) => {
     e.preventDefault();

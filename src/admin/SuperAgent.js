@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Avatar } from "@mui/material";
 import "./SuperAgent.css";
-import Ticket_infoa1 from "../customers/Ticket_infoa1";
-import { Link } from "react-router-dom";
-import ArrowCircleLeftOutlinedIcon from "@mui/icons-material/ArrowCircleLeftOutlined";
+import { Link, Outlet } from "react-router-dom";
 import { useStateValue } from "../Redux/StateProvider";
 import { auth, db } from "../database/firebase";
 import { useNavigate } from "react-router-dom";
@@ -11,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 
 function SuperAgent() {
-  const [tickets, setTickets] = useState([]);
+
   const [{ user }, dispatch] = useStateValue();
   const navigate = useNavigate();
 
@@ -22,27 +20,47 @@ function SuperAgent() {
     }
   };
 
-  useEffect(() => {
-    db.collection("tickets")
-      .where("agent", "==", user.email)
-      .where("status", "==", "open")   
-      .onSnapshot((snapshot) => {
-        tickets.sort((a, b) => {
-          return a.data.timestamp.seconds - b.data.timestamp.seconds;
-        });
+  // useEffect(() => {
+  //   db.collection("tickets")
+  //     .where("agent", "==", user.email)
+  //     .where("status", "==", "open")   
+  //     .onSnapshot((snapshot) => {
+  //       tickets.sort((a, b) => {
+  //         return a.data.timestamp.seconds - b.data.timestamp.seconds;
+  //       });
         
-        console.log(snapshot.docs.map((doc) => doc.data().ticket));
-        setTickets(
-          snapshot.docs.map((doc) => ({
-            uid: user.uid,
-            id: doc.id,
-            data: doc.data(),
-          }))
-          //   .orderBy("timestamp", "desc")
-        );
-      });
-  }, []);
-
+  //       console.log(snapshot.docs.map((doc) => doc.data().ticket));
+  //       setTickets(
+  //         snapshot.docs.map((doc) => ({
+  //           uid: user.uid,
+  //           id: doc.id,
+  //           data: doc.data(),
+  //         }))
+  //       );
+  //     });
+  // }, []);
+  // useEffect(() => {
+  //   const openQuery = db.collection("tickets").where("agent", "==", user.email).where("status", "==", "open");
+  //   const inProgressQuery = db.collection("tickets").where("agent", "==", user.email).where("status", "==", "In progress");
+    
+  //   Promise.all([openQuery.get(), inProgressQuery.get()])
+  //     .then((querySnapshots) => {
+  //       const ticketData = [];
+  //       querySnapshots.forEach((querySnapshot) => {
+  //         querySnapshot.forEach((doc) => {
+  //           ticketData.push({
+  //             uid: user.uid,
+  //             id: doc.id,
+  //             data: doc.data(),
+  //           });
+  //         });
+  //       });
+  //       setTickets(ticketData);
+  //     })
+  //     .catch((error) => {
+  //       console.log("Error getting tickets: ", error);
+  //     });
+  // });
   
 
   return (
@@ -61,9 +79,9 @@ function SuperAgent() {
             </Link>
           </div>
           <div className="button_container">
-            <Link to="progressedtickets" className="header_link">
+            <Link to="opentickets" className="header_link">
               <span className="span_tickets">
-              <h2>Tickets In Progress</h2>
+              <h2>Open Tickets</h2>
               </span>
             </Link>
           </div>
@@ -93,24 +111,11 @@ function SuperAgent() {
             </span>
           </div>
           <div className=" agentdashboard_tickets_header_title">
-            <h2>Total Open Tickets:{tickets.length}</h2>
+            <h2>Open Tickets</h2>
           </div>
         </div>
-        <div className="agentdashboard_tickets_ticketsdisplay">
-          {tickets.map((ticket) => (
-            <Ticket_infoa1
-              key={ticket.id}
-              id={ticket.id}
-              assigned={ticket.data.assigned}
-              status={ticket.data.status}
-              agent={ticket.data.agent}
-              subject={ticket.data.subject}
-              description={ticket.data.description}
-              timestamp={ticket.data.timestamp}
-              customer={ticket.data.customer}
-            />
-          ))}
-        </div>
+        <Outlet />
+    
       </div>
     </div>
   );

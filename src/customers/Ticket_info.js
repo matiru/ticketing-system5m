@@ -6,7 +6,7 @@ import { db } from "../database/firebase";
 import { Modal } from "@mui/material";
 import { serverTimestamp } from "firebase/firestore";
 import"./Chat.css";
-function Ticket_info({ subject, agent, status, id, description, rate ,customer }) {
+function Ticket_info({ subject, agent, status, id, description, rate ,customer,date }) {
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
   const [input1, setInput1] = useState("");
@@ -25,20 +25,8 @@ function Ticket_info({ subject, agent, status, id, description, rate ,customer }
         setMessages(snapshot.docs.map((doc) => doc.data()))
       );
   }, []);
-    const rateTicket = (e) => {
-      e.preventDefault();
-
-      db.collection("tickets")
-        .doc(id)
-        .update({
-          rate: input1,
-        })
-        .then(function () {
-          console.log("status updated");
-        });
-    };
+  
   const [isLoading, setIsLoading] = useState(false);
-
 
   const closeTicket = (e) => {
     e.preventDefault();
@@ -50,7 +38,7 @@ function Ticket_info({ subject, agent, status, id, description, rate ,customer }
   
     // Check if there are unassigned tickets
     db.collection("tickets")
-      .where("assigned", "==", false)
+      .where("status", "==", "pending")
       .limit(1)
       .get()
       .then((querySnapshot) => {
@@ -60,7 +48,7 @@ function Ticket_info({ subject, agent, status, id, description, rate ,customer }
             const ticketId = doc.id;
             doc.ref.update({
               agent: agentEmail,
-              assigned: true,
+              status: "open",
             }).then(() => {
               console.log(`Ticket ${ticketId} assigned to agent ${agentEmail}`);
   
@@ -127,10 +115,6 @@ function Ticket_info({ subject, agent, status, id, description, rate ,customer }
   };
 
   
-
-
-
-
 
 
 
@@ -256,23 +240,7 @@ function Ticket_info({ subject, agent, status, id, description, rate ,customer }
                   <h5>agent-email : </h5>
                   {agent}
                 </div>
-                {/* <div className="ticket_subject">
-                  <h5>rate your service : </h5>
-                  <select
-                    value={input1}
-                    onChange={(e) => setInput1(e.target.value)}
-                  >
-                    <option></option>
-                    <option value="satisfied">satisfied🙂</option>
-                    <option value="moderately_satisfied">
-                      moderately-satisfied 🙁
-                    </option>
-                    <option value="poor">disatisfied 😠</option>
-                  </select>
-                  <button onClick={rateTicket} className="">
-                    Rate
-                  </button>
-                </div> */}
+              
                 <div className="chat_body">
                   {messages.map((message) => (
                     <p
@@ -306,9 +274,28 @@ function Ticket_info({ subject, agent, status, id, description, rate ,customer }
               </form>
             </div>
           </Modal>
-          <h3>subject:{subject}</h3>
-          <h3>status:{status}</h3>
-          <h3>agent:{agent}</h3>
+          <table>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Subject</th>
+      <th>Status</th>
+      <th>Agent</th>
+      <th>customer</th>
+      <th>Rate</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{date}</td>
+      <td>{subject}</td>
+      <td>{status}</td>
+      <td>{agent}</td>
+      <td>{customer}</td>
+      <td>{rate}</td>
+    </tr>
+  </tbody>
+</table>
 
           <button onClick={closeTicket}>closeticket</button>
         </div>
@@ -366,10 +353,29 @@ function Ticket_info({ subject, agent, status, id, description, rate ,customer }
               </form>
             </div>
           </Modal>
-          <h3>subject:{subject}</h3>
-          <h3>status:{status}</h3>
-          <h3>agent:{agent}</h3>
-          <h3>rate:{rate}</h3>
+          <table>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Subject</th>
+      <th>Status</th>
+      <th>Agent</th>
+      <th>customer</th>
+      <th>Rate</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{date}</td>
+      <td>{subject}</td>
+      <td>{status}</td>
+      <td>{agent}</td>
+      <td>{customer}</td>
+      <td>{rate}</td>
+    </tr>
+  </tbody>
+</table>
+
 
           {/* <button onClick={closeTicket}>Ticket Closed</button> */}
         </div>

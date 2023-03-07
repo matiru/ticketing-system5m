@@ -8,7 +8,7 @@ import { serverTimestamp } from "firebase/firestore";
 import"./Chat.css";
 
 
-function Ticket_infoa3({ subject, agent, status, id, description, rate }) {
+function Ticket_infoa3({ subject, agent, status, id, description, rate,customer,date}) {
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
   const [input1, setInput1] = useState("");
@@ -18,15 +18,33 @@ function Ticket_infoa3({ subject, agent, status, id, description, rate }) {
   const [messages, setMessages] = useState([]);
   const [{ user }, dispatch] = useStateValue();
 
+  // useEffect(() => {
+  //   db.collection("tickets")
+  //     .doc(id)
+  //     .collection("messages")
+  //     .orderBy("timestamp", "asc")
+  //     .onSnapshot((snapshot) =>
+  //       setMessages(snapshot.docs.map((doc) => doc.data()))
+  //     );
+  // }, []);
+
+
+
+
   useEffect(() => {
     db.collection("tickets")
       .doc(id)
       .collection("messages")
       .orderBy("timestamp", "asc")
-      .onSnapshot((snapshot) =>
-        setMessages(snapshot.docs.map((doc) => doc.data()))
-      );
-  }, []);
+      .get()
+      .then((snapshot) => {
+        setMessages(snapshot.docs.map((doc) => doc.data()));
+      });
+  });
+  
+
+
+
     const rateTicket = (e) => {
       e.preventDefault();
 
@@ -96,23 +114,7 @@ function Ticket_infoa3({ subject, agent, status, id, description, rate }) {
                   <h5>agent-email : </h5>
                   {agent}
                 </div>
-                {/* <div className="ticket_subject">
-                  <h5>rate your service : </h5>
-                  <select
-                    value={input1}
-                    onChange={(e) => setInput1(e.target.value)}
-                  >
-                    <option></option>
-                    <option value="satisfied">satisfied🙂</option>
-                    <option value="moderately_satisfied">
-                      moderately-satisfied 🙁
-                    </option>
-                    <option value="poor">disatisfied 😠</option>
-                  </select>
-                  <button onClick={rateTicket} className="">
-                    Rate
-                  </button>
-                </div> */}
+             
                 <div className="chat_body">
                   {messages.map((message) => (
                     <p
@@ -146,69 +148,67 @@ function Ticket_infoa3({ subject, agent, status, id, description, rate }) {
               </form>
             </div>
           </Modal>
-          <h3>subject:{subject}</h3>
-          <h3>status:{status}</h3>
-          <h3>agent:{agent}</h3>
+                 <table>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Subject</th>
+      <th>Status</th>
+      <th>Agent</th>
+      <th>customer</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{date}</td>
+      <td>{subject}</td>
+      <td>{status}</td>
+      <td>{agent}</td>
+      <td>{customer}</td>
+    </tr>
+  </tbody>
+</table>
         </div>
       ) : (
         <div className="ticket_info_closed">
-          <Modal
-            className="signup-modal"
-            open={open}
-            onClose={handleClose}
-            h
-            aria-labelledby="simple-modal-title"
-            aria-describedby="simple-modal-description"
-          >
-            <div className="ticketcontent">
-              <form className="add">
-                <button onClick={handleClose} className="ticket_cancel_modal">
-                  X
-                </button>
-
-                <div className="ticket_subject">
-                  <h5>subject: </h5>
-                  <input value={subject} type="text" maxLength="70" readOnly />
+         
+         <table>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Subject</th>
+      <th>Status</th>
+      <th>Agent</th>
+      <th>Rate Service</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{date}</td>
+      <td>{subject}</td>
+      <td>{status}</td>
+      <td>{agent}</td>
+    
+      <td> <select
+                    value={input1}
+                    onChange={(e) => setInput1(e.target.value)}
+                  >
+                    <option></option>
+                    <option value="satisfied">satisfied🙂</option>
+                    <option value="moderately_satisfied">
+                      moderately-satisfied 🙁
+                    </option>
+                    <option value="poor">disatisfied 😠</option>
+                  </select> </td>
+    
+    </tr>
+  </tbody>
+</table>
+ <div className="ticket_subject">
+                  <button onClick={rateTicket} className="">
+                    Rate
+                  </button>
                 </div>
-
-                <div className="ticket_description">
-                  <h5>description: </h5>
-                  <textarea
-                    className="ticket_description"
-                    type="text"
-                    value={description}
-                    readOnly
-                  ></textarea>
-                </div>
-                <div className="ticket_subject">
-                  <h5>agent-email : </h5>
-                  {agent}
-                </div>
-                <div className="chat_body">
-                  {messages.map((message) => (
-                    <p
-                      // if the message is from the user then the message will be on the right side
-                      // and if the message is from a different user then the message will be on the left side in a different color
-                      className={`chat_message ${
-                        message.name == user.displayName && "chat_receiver"
-                      }`}
-                    >
-                      <span className="chat_name">{message.name}</span>
-                      {message.message}
-                      <span className="chat_timestamp">
-                        {new Date(message.timestamp?.toDate()).toUTCString()}
-                      </span>
-                    </p>
-                  ))}
-                </div>
-              </form>
-            </div>
-          </Modal>
-          <h3>subject:{subject}</h3>
-          <h3>status:{status}</h3>
-          <h3>agent:{agent}</h3>
-          <h3>rate:{rate}</h3>
-
           {/* <button onClick={closeTicket}>Ticket Closed</button> */}
         </div>
       )}

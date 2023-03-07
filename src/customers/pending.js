@@ -7,31 +7,13 @@ import Ticket_infoa from "./Ticket_infoa";
 import { useStateValue } from "../Redux/StateProvider";
 //import { query, collection, onSnapshot } from "firebase/firestore";
 
-function ClientTickets() {
+function PendingTickets() {
   const [tickets, setTickets] = useState([]);
   const [{ user }, dispatch] = useStateValue();
-  
-  // useEffect(() => {
-  //   db.collection("tickets")
-
-     
-  //     .where("customer", "==", user.email)
-  //     .where("status", "==", "open")
-  //      .onSnapshot((snapshot) => { 
-  //       console.log(snapshot.docs.map((doc) => doc.data().ticket));
-  //       setTickets(
-  //         snapshot.docs.map((doc) => ({
-  //           uid: user.uid,
-  //           id: doc.id,
-  //           data: doc.data(),
-  //         }))
-  //       );
-  //     })
-  // } , [user]) ;
   useEffect(() => {
      db.collection("tickets")
       .where("customer", "==", user.email)
-      .where("status", "==", "open")
+      .where("status", "==", "pending")
       .get()
       .then((snapshot) => {
         setTickets(
@@ -77,4 +59,4 @@ function ClientTickets() {
   );
 }
 
-export default ClientTickets;
+export default PendingTickets;

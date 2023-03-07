@@ -123,48 +123,7 @@ function Report() {
         </div>
       </div>
 
-      <div className="rating_report">
-       
-
-            <h2>Ratings</h2>
-          
-       
-
-        <div className="open_tickets">
-          <span className="total_ticket_span">
-            <h2>modal rating 🧮 </h2>
-          </span>
-          <span className="total_ticket_span1">
-            <h1> {} </h1>
-          </span>
-        </div>
-
-        <div className="open_tickets">
-        <span className="total_ticket_span">
-            <h2>Satisfied 🙂 </h2>
-          </span>
-          <span className="total_ticket_span1">
-            <h1> {satisfied}</h1>
-          </span>
-        </div>
-
-        <div className="open_tickets">
-          <span className="total_ticket_span">
-            <h2>Moderatly Satisfied 🙁 </h2>
-          </span>
-          <span className="total_ticket_span1">
-            <h1> {modsatisfied}</h1>
-          </span>
-          </div>
-        <div className="open_tickets">
-          <span className="total_ticket_span">
-            <h2>Disatisfied 😠 </h2>
-          </span>
-          <span className="total_ticket_span1">
-            <h1> {unsatisfied}</h1>
-          </span>
-      </div>
-      </div>
+   
     </div>
   );
 }

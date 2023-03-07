@@ -11,23 +11,52 @@ function ClientTickets() {
   const [tickets, setTickets] = useState([]);
   const [{ user }, dispatch] = useStateValue();
 
+  // useEffect(() => {
+  //   db.collection("tickets")
+  //     .where("status", "==", "In progress")
+  //     .onSnapshot((snapshot) => {
+  //       console.log(snapshot.docs.map((doc) => doc.data().ticket));
+  //       setTickets(
+  //         snapshot.docs.map((doc) => ({
+  //           uid: user.uid,
+  //           id: doc.id,
+  //           data: doc.data(),
+  //         }))
+  //       );
+  //     });
+  // }, []);
+
+
+
   useEffect(() => {
     db.collection("tickets")
       .where("status", "==", "In progress")
-      // .orderBy("timestamp", "desc")
-
-      .onSnapshot((snapshot) => {
-        console.log(snapshot.docs.map((doc) => doc.data().ticket));
+      .get()
+      .then((querySnapshot) => {
         setTickets(
-          snapshot.docs.map((doc) => ({
+          querySnapshot.docs.map((doc) => ({
             uid: user.uid,
             id: doc.id,
             data: doc.data(),
           }))
-          //   .orderBy("timestamp", "desc")
         );
+      })
+      .catch((error) => {
+        console.log("Error getting documents: ", error);
       });
   }, []);
+  
+
+
+
+
+
+
+
+
+
+
+  
 
   return (
     <div className="client_tickets">

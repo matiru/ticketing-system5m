@@ -88,7 +88,7 @@ function AllAgentReport() {
     SetTickets(tickets);
   });
   
-},[])
+})
  
 //  sort tickets by date
  tickets.sort((a, b) => {

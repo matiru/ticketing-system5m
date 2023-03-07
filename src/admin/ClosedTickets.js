@@ -11,24 +11,45 @@ function ClientTickets() {
   const [tickets, setTickets] = useState([]);
   const [{ user }, dispatch] = useStateValue();
 
+  // useEffect(() => {
+  //   db.collection("tickets")
+  //     .where("agent", "==", user.email)
+  //     .where("status", "==", "closed")
+   
+  //     .onSnapshot((snapshot) => {
+       
+  //       console.log(snapshot.docs.map((doc) => doc.data().ticket));
+  //       setTickets(
+  //         snapshot.docs.map((doc) => ({
+  //           uid: user.uid,
+  //           id: doc.id,
+  //           data: doc.data(),
+  //         }))
+       
+  //       );
+  //     });
+  // }, []);
+  
   useEffect(() => {
     db.collection("tickets")
       .where("agent", "==", user.email)
       .where("status", "==", "closed")
-   
-      .onSnapshot((snapshot) => {
-       
-        console.log(snapshot.docs.map((doc) => doc.data().ticket));
+      .get()
+      .then((querySnapshot) => {
         setTickets(
-          snapshot.docs.map((doc) => ({
+          querySnapshot.docs.map((doc) => ({
             uid: user.uid,
             id: doc.id,
             data: doc.data(),
           }))
-       
         );
+      })
+      .catch((error) => {
+        console.log("Error getting documents: ", error);
       });
   }, []);
+  
+  
   tickets.sort((a, b) => {
     return a.data.timestamp.seconds - b.data.timestamp.seconds;
   });
@@ -61,6 +82,8 @@ function ClientTickets() {
               subject={ticket.data.subject}
               timestamp={ticket.data.timestamp}
               customer={ticket.data.customer}
+              rate={ticket.data.rate}
+              date={ticket.data.date}
             />
           ))}
         </div>

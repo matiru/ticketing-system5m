@@ -8,7 +8,7 @@ import { useParams } from "react-router-dom";
 import { Modal } from "@mui/material";
 import { serverTimestamp } from "firebase/firestore";
 
-function Ticket_infoa({ subject, customer,agent, status, description, id, rate }) {
+function Ticket_infoa({ subject, customer,agent, status, description, id, rate,date }) {
   const [input, setInput] = useState("");
   const [seed, setSeed] = useState("");
   const { roomId } = useParams();
@@ -48,10 +48,28 @@ function Ticket_infoa({ subject, customer,agent, status, description, id, rate }
     <div onClick={() => setOpen(true)}>
       {status === "open" ? (
         <div className="ticket_infoa">
-      
-          <h3>subject:{subject}</h3>
-          <h3>status:{status}</h3>
-          <h3>agent:{agent}</h3>
+                <table>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Subject</th>
+      <th>Status</th>
+      <th>Agent</th>
+      <th>customer</th>
+  
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{date}</td>
+      <td>{subject}</td>
+      <td>{status}</td>
+      <td>{agent}</td>
+      <td>{customer}</td>
+     
+    </tr>
+  </tbody>
+</table>
         </div>
       ) : (
         <div className="ticket_info_closed">
@@ -107,10 +125,28 @@ function Ticket_infoa({ subject, customer,agent, status, description, id, rate }
               </form>
             </div>
           </Modal>
-          <h3>subject:{subject}</h3>
-          <h3>status:{status}</h3>
-          <h3>agent:{agent}</h3>
-          <h3>rate:{rate}</h3>
+          <table>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Subject</th>
+      <th>Status</th>
+      <th>Agent</th>
+      <th>customer</th>
+      <th>Rate</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{date}</td>
+      <td>{subject}</td>
+      <td>{status}</td>
+      <td>{agent}</td>
+      <td>{customer}</td>
+      <td>{rate}</td>
+    </tr>
+  </tbody>
+</table>
         </div>
       )}
     </div>

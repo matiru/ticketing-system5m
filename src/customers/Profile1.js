@@ -32,21 +32,48 @@ function Profile1({id}) {
       });
   };
 
+  // useEffect(() => {
+  //   db.collection("customers")
+
+  //     .where("email", "==", user.email)
+  //     .onSnapshot((snapshot) => {
+  //       console.log(snapshot.docs.map((doc) => doc.data().customer));
+  //       setCustomers(
+  //         snapshot.docs.map((doc) => ({
+  //           uid: user.uid,
+  //           id: doc.id,
+  //           data: doc.data(),
+  //         }))
+  //       );
+  //     });
+  // }, []);
+
+
+
+
+
+
   useEffect(() => {
     db.collection("customers")
-
       .where("email", "==", user.email)
-      .onSnapshot((snapshot) => {
-        console.log(snapshot.docs.map((doc) => doc.data().customer));
+      .get()
+      .then((querySnapshot) => {
         setCustomers(
-          snapshot.docs.map((doc) => ({
+          querySnapshot.docs.map((doc) => ({
             uid: user.uid,
             id: doc.id,
             data: doc.data(),
           }))
         );
+      })
+      .catch((error) => {
+        console.log("Error getting documents: ", error);
       });
   }, []);
+  
+
+
+
 
 const updatePhone = (e) => {
   e.preventDefault();

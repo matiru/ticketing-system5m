@@ -45,7 +45,7 @@ function AdminLogin() {
 
         getDocs(q).then((querySnapshot) => {
           querySnapshot.forEach((doc) => {
-            console.log(doc.id, " => ", doc.data());
+       
             if (doc.data().email === email) {
               navigate("/adminagent");
             }

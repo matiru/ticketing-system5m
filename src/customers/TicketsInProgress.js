@@ -9,31 +9,44 @@ function TicketsInProgress() {
   const [tickets, setTickets] = useState([]);
   const [{ user }, dispatch] = useStateValue();
   
+  // useEffect(() => {
+  //   db.collection("tickets")
+  //     .where("customer", "==", user.email)
+  //     .where("status", "==", "In progress")
+  //     .onSnapshot((snapshot) => {
+  //       tickets.sort((a, b) => {
+  //         return a.data.timestamp.seconds - b.data.timestamp.seconds;
+  //       });
+  //       console.log(snapshot.docs.map((doc) => doc.data().ticket));
+  //       setTickets(
+  //         snapshot.docs.map((doc) => ({
+  //           uid: user.uid,
+  //           id: doc.id,
+  //           data: doc.data(),
+  //         }))
+  //       );
+  //     });
+  // }, []);
+
   useEffect(() => {
     db.collection("tickets")
       .where("customer", "==", user.email)
       .where("status", "==", "In progress")
-      .onSnapshot((snapshot) => {
-        tickets.sort((a, b) => {
-          return a.data.timestamp.seconds - b.data.timestamp.seconds;
-        });
-        console.log(snapshot.docs.map((doc) => doc.data().ticket));
-        setTickets(
-          snapshot.docs.map((doc) => ({
-            uid: user.uid,
-            id: doc.id,
-            data: doc.data(),
-          }))
-        );
-      });
-  }, []);
-
+      .get()
+      .then((snapshot) => {
+        const ticketData = snapshot.docs.map((doc) => ({
+          uid: user.uid,
+          id: doc.id,
+          data: doc.data(),
+        }));
+        setTickets(ticketData);
+      })
+      .catch((error) => console.log(error));
+  });
+  
   return (
     <div className="client_tickets">
       <div className="client_tickets_header">
-        <Link to="/customer" className="backheader_link">
-          <ArrowCircleLeftOutlinedIcon className="back_button" />
-        </Link>
         <div className="clients_tickets_header_title">
           {tickets?.length === 0 ? (
             <h4>Kindly wait for an agent to be available.Thank you for your patience</h4>
@@ -56,6 +69,7 @@ function TicketsInProgress() {
               description={ticket.data.description}
               timestamp={ticket.data.timestamp}
               customer={ticket.data.customer}
+              date={ticket.data.date}
             />
           ))}
         </div>

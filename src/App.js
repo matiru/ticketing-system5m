@@ -24,6 +24,14 @@ import AdminLogin from "../src/login_and_signup/AdminLogin";
 import TicketsInProgress from "../src/customers/TicketsInProgress";
 import AdminProgressedTickets from "../src/admin/Adminpro";
 import "./admin/Profile.css";
+import Test from "./Test";
+import CreateTicketcom from "./customers/createticket";
+
+import ClientsOpenTickets from "./admin/allopentickets";
+import TicketsDisplay from "./admin/ticketdisplay";
+import { Pending } from "@mui/icons-material";
+import PendingTickets from "./customers/pending";
+import APendingTickets from "./admin/adminPending";
 
 function App() {
   const [{ user }, dispatch] = useStateValue();
@@ -48,60 +56,80 @@ function App() {
     };
   }, []);
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   return (
     <div className="App">
       <Router>
         <Routes>
-          <Route path="/customer" element={<RaiseTicket />}></Route>
-          <Route path="/signup" element={<SignUp />}></Route>
-          <Route path="/custo" element={<SignUp />}></Route>
-          <Route path="/agentdashboard" element={<SuperAgent />}></Route>
+          
+        <Route path="/test" element={ <Test/>}></Route>
+
+        <Route path="/customer" element={<RaiseTicket />}>
+        <Route path='createticket' element={<CreateTicketcom/>}/>
+        <Route path='profile' element={<Profile1 />}/>
+        <Route path='pendingtickets' element={<PendingTickets/>}/>
+        <Route path='opentickets' element={<ClientTickets/>}/>
+        <Route path='progressedtickets' element={<TicketsInProgress/>}/>
+        <Route path='closedtickets' element={<OpenTickets/>}/>
+        </Route>
+
+
+
+
+
           <Route path="/" element={<LandingPage/>}></Route>
-          <Route path="/adminagent" element={<AdminAgent />}></Route>
-          <Route
-            path="/adminagent/closedtickets"
-            element={<ClosedTickets2 />}
-          ></Route>
-          <Route
-            path="/adminagent/progressedtickets"
-            element={<AdminProgressedTickets />}
-          ></Route>
-
-          <Route path="/adminagent/agents" element={<AddAgent />}></Route>
-          <Route
-            path="/adminagent/agentsreport"
-            element={<AllAgentReport />}
-          ></Route>
-          <Route path="adminagent/profile" element={<Profile2 />}></Route>
-
+          <Route path="/signup" element={<SignUp />}></Route>
           <Route path="/agent" element={<AgentLogin />}></Route>
           <Route path="/admin" element={<AdminLogin />}></Route>
-          <Route path="/adminagent/agents" element={<AddAgent />}></Route>
 
-          <Route path="/customer/mytickets" element={<ClientTickets />}></Route>
-          <Route path="/customer/myprogressedtickets" element={<TicketsInProgress/>}></Route>
+
+
+
+          
+          <Route path="/adminagent" element={<AdminAgent />}>
+          <Route path="profile" element={<Profile2 />}/>
+          <Route path="report"  element={<AllAgentReport />}/>
+          <Route path='pendingtickets' element={<APendingTickets/>}/>
+          <Route path="opentickets" element={< ClientsOpenTickets />}/>
+          <Route path="closedtickets" element={<ClosedTickets2 />}/>
+          <Route path="ticketsprogressed" element={<AdminProgressedTickets />}/>
+          <Route path="addagents" element={<AddAgent />}/>
+
+          </Route>
      
-          <Route path="/customer/closedtickets" element={<OpenTickets />}></Route>
-          <Route
-            path="/agentdashboard/closedtickets"
-            element={<ClosedTickets />}
-          ></Route>
-         
-          <Route
-            path="/agentdashboard/progressedtickets"
-            element={<AgentProgressed />}
-          ></Route>
-          <Route path="/agentdashboard/profile" element={<Profile />}></Route>
-          <Route path="/agentdashboard/report" element={<Report />}></Route>
-          <Route
-            path="/agentdashboard/agentsreport"
-            element={<AllAgentReport />}
-          ></Route>
-          <Route path="/customer/profile" element={<Profile1 />}></Route>
-          <Route
-            path="/super/closedtickets"
-            element={<ClosedTickets />}
-          ></Route>
+
+
+
+
+
+          <Route path="/agentdashboard" element={<SuperAgent />}>
+
+          <Route path="profile" element={<Profile />}/>
+          <Route path="report"  element={<Report />}/>
+          <Route path="opentickets" element={<TicketsDisplay />}/>
+          <Route path="closedtickets" element={<ClosedTickets />}/>
+        
+            
+          </Route>
+       \
+
+
+
+
+
         </Routes>
       </Router>
     </div>

@@ -11,6 +11,39 @@ import "firebase/compat/auth";
 //   measurementId: "G-ZHX8T33KSC",
 // }
 
+// const firebaseConfig = {
+//   apiKey: "AIzaSyDGjzhMOVD1ZVAx2dDdQMDYvrVKJyaPrYg",
+//   authDomain: "ticketing-system5m-caaa5.firebaseapp.com",
+//   projectId: "ticketing-system5m-caaa5",
+//   storageBucket: "ticketing-system5m-caaa5.appspot.com",
+//   messagingSenderId: "661401109698",
+//   appId: "1:661401109698:web:8b2c8647d29048c592675b",
+//   measurementId: "G-FLGCVXMP06"
+// };
+
+// const firebaseConfig = {
+//   apiKey: "AIzaSyDBMfRIt9hCoWiyJ0Y632CeNIskXjxqjF0",
+//   authDomain: "ticketing-system-4b47b.firebaseapp.com",
+//   projectId: "ticketing-system-4b47b",
+//   storageBucket: "ticketing-system-4b47b.appspot.com",
+//   messagingSenderId: "225180538539",
+//   appId: "1:225180538539:web:691d15f37774f5ede409ee",
+//   measurementId: "G-RK8TBZXHCV"
+// };
+
+
+
+// const firebaseConfig = {
+//   apiKey: "AIzaSyDwIO5DXxvlHuMO_-dU4emNq7RYE9i9-Hs",
+//   authDomain: "ticketing--system5m.firebaseapp.com",
+//   projectId: "ticketing--system5m",
+//   storageBucket: "ticketing--system5m.appspot.com",
+//   messagingSenderId: "385924858926",
+//   appId: "1:385924858926:web:587beb87b435f23713cbbf",
+//   measurementId: "G-D8MMB2PPMS"
+// };
+
+
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyDUt15ma5dfpoBgSOOov1urJVU0V9Xfnwg",
