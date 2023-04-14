@@ -47,8 +47,9 @@ function Ticket_info({ subject, agent, status, id, description, rate ,customer,d
           querySnapshot.forEach((doc) => {
             const ticketId = doc.id;
             doc.ref.update({
-              agent: agentEmail,
               status: "open",
+              agent: agentEmail,
+              
             }).then(() => {
               console.log(`Ticket ${ticketId} assigned to agent ${agentEmail}`);
   

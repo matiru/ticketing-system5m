@@ -57,6 +57,12 @@ function LandingPage() {
       .catch((error) => alert(error.message));
     setLoading(false);
   };
+  
+  // const signIn = (e) => {
+  //   e.preventDefault()
+  //   navigate("/customer")
+    
+  // }
 
   return (
     <div className="container">

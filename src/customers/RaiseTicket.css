@@ -78,7 +78,7 @@
   /* Sidebar styles */
   .sidebar {
     display: flex;
-    flex: 0.20;
+    flex: 0.26;
     flex-direction: column;
     background-color: #f7f7f7;
     padding: 20px;

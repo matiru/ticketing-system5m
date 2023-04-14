@@ -91,78 +91,70 @@ const CreateTicketcom = () => {
       };
     
 
-    // const createTicket = async (subject, description, customerEmail) => {
-    //   try {
-    //     const ticketsRef = collection(db, "tickets");
-    //     const agentsRef = collection(db, "agents");
-    //     const counterRef = collection(db, "counter");
-    
-    //     // Find an available agent
-    //     const availableAgents = await getDocs(query(agentsRef, where("isActive", "==", true)));
-    //     if (!availableAgents.empty) {
-    //       const lastAssignedAgent = await getDoc(doc(agentsRef, "last_assigned"));
-    //       let assignedAgent;
-    
-    //       // Check if the last assigned agent exists and is available
-    //       if (lastAssignedAgent.exists() && lastAssignedAgent.data().isActive) {
-    //         assignedAgent = lastAssignedAgent;
-    //       } else {
-    //         // Assign a random available agent
-    //         assignedAgent = availableAgents.docs[Math.floor(Math.random() * availableAgents.docs.length)];
-    //       }
-    
-    //       // Get the total number of tickets
-    //       const ticketCount = await getCountFromServer(query(ticketsRef));
-    //       const allTicketsCount = ticketCount.data().count;
-    
-    //       // Create a new ticket document with the given fields and assign to agent
-    //       const newTicketRef = await addDoc(ticketsRef, {
-    //         id: allTicketsCount + 1,
-    //         subject,
-    //         description,
-    //         time: serverTimestamp(),
-    //         status: "open",
-    //         customer: customerEmail,
-    //         timestamp: serverTimestamp(),
-    //         closing_timestamp: serverTimestamp(),
-    //         date: new Date().toLocaleDateString(),
-    //         assigned: true,
-    //         agent: assignedAgent.data().email
-    //       });
-    
-    //       // Update the assigned agent's status
-    //       await updateDoc(assignedAgent.ref, { isActive: false });
-    //       // Update the last assigned agent
-    //       await updateDoc(doc(agentsRef, "last_assigned"), { email: assignedAgent.data().email });
-    
-    //       window.alert("Ticket successfully created. Our agent will contact you soon! Be sure to check your open tickets for communication with the agent!");
-    //       return newTicketRef.id;
-    //     } else {
-    //       // No active agents found, add a queue number property to the ticket
-    //       const ticketCount = await getCountFromServer(query(ticketsRef));
-    
-    //       const newTicketRef = await addDoc(ticketsRef, {
-    //         id: ticketCount.data().count + 1,
-    //         subject,
-    //         description,
-    //         time: serverTimestamp(),
-    //         status: "pending",
-    //         customer: customerEmail,
-    //         timestamp: serverTimestamp(),
-    //         closing_timestamp: serverTimestamp(),
-    //         date: new Date().toLocaleDateString(),
-    //         assigned: false,
-    //       });
-    
-    //       window.alert("Sorry, no agents are currently available. Your ticket has been added to the queue.");
-    //       return newTicketRef.id;
-    //     }
-    //   } catch (error) {
-    //     console.error(error);
-    //     // Handle error gracefully
-    //     throw new Error("Failed to create a new ticket.");
-    //   }
-    // };
+      // const createTicket = async (subject, description, customerEmail) => {
+      //   try {
+      //     const ticketsRef = collection(db, "tickets");
+      //     const agentsRef = collection(db, "agents");
+      //     const counterRef = collection(db, "counter");
+      
+      //     // Find an available agent whose status is active and whose last assigned is the earliest
+      //     const availableAgents = await getDocs(query(agentsRef, where("isActive", "==", true), orderBy("last_assigned", "asc"), limit(1)));
+      //     if (!availableAgents.empty) {
+      //       const assignedAgent = availableAgents.docs[0];
+      
+      //       // Get the total number of tickets
+      //       const ticketCount = await getCountFromServer(query(ticketsRef));
+      //       const allTicketsCount = ticketCount.data().count;
+      
+      //       // Create a new ticket document with the given fields and assign to agent
+      //       const newTicketRef = await addDoc(ticketsRef, {
+      //         id: allTicketsCount + 1,
+      //         subject,
+      //         description,
+      //         time: serverTimestamp(),
+      //         status: "open",
+      //         customer: customerEmail,
+      //         timestamp: serverTimestamp(),
+      //         closing_timestamp: serverTimestamp(),
+      //         date: new Date().toLocaleDateString(),
+      //         assigned: true,
+      //         agent: assignedAgent.data().email
+      //       });
+      
+      //       // Update the assigned agent's status
+      //       await updateDoc(assignedAgent.ref, { isActive: false });
+      //       // Update the last assigned agent
+      //       await updateDoc(doc(agentsRef, "last_assigned"), { email: assignedAgent.data().email });
+      
+      //       window.alert("Ticket successfully created. Our agent will contact you soon! Be sure to check your open tickets for communication with the agent!");
+      //       return newTicketRef.id;
+      //     } else {
+      //       // No active agents found, add a queue number property to the ticket
+      //       const ticketCount = await getCountFromServer(query(ticketsRef));
+      
+      //       const newTicketRef = await addDoc(ticketsRef, {
+      //         id: ticketCount.data().count + 1,
+      //         subject,
+      //         description,
+      //         time: serverTimestamp(),
+      //         status: "pending",
+      //         customer: customerEmail,
+      //         timestamp: serverTimestamp(),
+      //         closing_timestamp: serverTimestamp(),
+      //         date: new Date().toLocaleDateString(),
+      //         assigned: false,
+      //       });
+      
+      //       window.alert("Sorry, no agents are currently available. Your ticket has been added to the queue.");
+      //       return newTicketRef.id;
+      //     }
+      //   } catch (error) {
+      //     console.error(error);
+      //     // Handle error gracefully
+      //     throw new Error("Failed to create a new ticket.");
+      //   }
+      // };
+      
       const submit = async (e) => {
         e.preventDefault();
         setLoading(true);

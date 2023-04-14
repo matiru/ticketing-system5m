@@ -212,7 +212,6 @@ function RaiseTicket({ id }) {
         </Link>
       </div>
     </div>
-
     <Outlet />
 
       </div>

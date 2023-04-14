@@ -88,7 +88,9 @@ function AllAgentReport() {
     SetTickets(tickets);
   });
   
-})
+},[])
+console.log(tickets,"DJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ"); 
+console.log(typeof(tickets))
  
 //  sort tickets by date
  tickets.sort((a, b) => {
